@@ -1,0 +1,24 @@
+body {
+    font-family: monospace;
+}
+header {
+    text-align: center;
+}
+footer {
+    position: absolute;
+    bottom: 2%;
+}
+.leftside {
+    position: absolute;
+    width: 50%;
+    top: 15%;
+
+}
+.rightside {
+    position:absolute;
+    left: 60%;
+    top: 15%;
+}
+#trash:hover {
+    color: red;
+};
