@@ -1,15 +1,17 @@
 "use strict";
-var L09_Viruses;
-(function (L09_Viruses) {
-    function createPaths() {
-        L09_Viruses.virusPaths = createVirusPaths();
-        L09_Viruses.antibodyPaths = createAntibodyPaths();
-        L09_Viruses.killercellPaths = createKillercellPaths();
-        L09_Viruses.bloodcellPaths = createBloodcellPaths();
-    }
-    L09_Viruses.createPaths = createPaths;
-    function createVirusPaths() {
-        let paths = [];
-    }
-})(L09_Viruses || (L09_Viruses = {}));
+// namespace L09_Viruses {
+//     export let virusPaths: Path2D[];
+//     export let antibodyPaths: Path2D[];
+//     export let killercellPaths: Path2D[];
+//     export let bloodcellPaths: Path2D[];
+//     export function createPaths(): void {
+//         virusPaths = createVirusPaths();
+//         antibodyPaths = createAntibodyPaths();
+//         killercellPaths = createKillercellPaths();
+//         bloodcellPaths = createBloodcellPaths();
+//     }
+//     function createVirusPaths(): Path2D {
+//         let paths: Path2D[] = [];
+//   
+// }
 //# sourceMappingURL=Paths.js.map

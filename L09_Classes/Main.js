@@ -21,7 +21,7 @@ var L09_Viruses;
         createAntibody(4);
         createKillercell(4);
         createBloodcell(9);
-        KillercellInfection(_event);
+        // KillercellInfection(_event);
         window.setInterval(update, 20);
     }
     function drawBackground() {
@@ -112,31 +112,32 @@ var L09_Viruses;
             bloodcell.draw();
         }
     }
-    function KillercellInfection(_event) {
-        // Bereich in dem der Virus auf die Killerzelle trifft 
-        let virus, virusposition = new L09_Viruses.Vector(L09_Viruses.Virus.position.x);
-        let humancellHit = getKillercellHit(hotspot);
-        for (let virus of viruses) {
-            // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
-            if (humancellHit) {
-                startInfection(virus);
-            }
-        }
-        function getKillercellHit(_virusposition) {
-            for (let killercell of killercells) {
-                if (killercell.isHit(_virusposition))
-                    return killercell;
-            }
-            return null;
-        }
-        function startInfection(_virus) {
-            window.setTimeout(function () {
-                endInfection(_virus);
-            }, 5000);
-        }
-        function endInfection(_virus) {
-            console.log("hallo");
-        }
-    }
+    // function KillercellInfection(_event: Event): void {
+    //     // Bereich in dem der Virus auf die Killerzelle trifft 
+    //     let virus:
+    //         let virusposition: Vector = new Vector (Virus.position.x);
+    //     let humancellHit: Killercell | null = getKillercellHit(hotspot);
+    //     for (let virus of viruses) {
+    //         // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
+    //         if (humancellHit) {
+    //             startInfection(virus);
+    //         }
+    //     }
+    //     function getKillercellHit(_virusposition: Vector): Killercell | null {
+    //         for (let killercell of killercells) {
+    //             if (killercell.isHit(_virusposition))
+    //                 return killercell;
+    //         }
+    //         return null;
+    //     }
+    //     function startInfection(_virus: Virus): void {
+    //         window.setTimeout(function (): void {
+    //             endInfection(_virus);
+    //         },                5000);
+    //     }
+    // function endInfection(_virus: Virus) {
+    //     console.log("hallo");
+    //     }
+    // }
 })(L09_Viruses || (L09_Viruses = {}));
 //# sourceMappingURL=Main.js.map
