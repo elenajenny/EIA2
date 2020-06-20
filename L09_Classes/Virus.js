@@ -47,10 +47,6 @@ var L09_Viruses;
             L09_Viruses.crc2.restore();
             // crc2.stroke(virusPaths[this.size]);
         }
-        isInfecting(_virusposition) {
-            let viruspositionx = this.position.x;
-            let viruspositiony = this.position.y;
-        }
     }
     L09_Viruses.Virus = Virus;
 })(L09_Viruses || (L09_Viruses = {}));

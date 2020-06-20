@@ -55,9 +55,5 @@ namespace L09_Viruses {
             crc2.restore();
             // crc2.stroke(virusPaths[this.size]);
         }
-        isInfecting(_virusposition: Vector): void {
-            let viruspositionx: number = this.position.x;
-            let viruspositiony: number = this.position.y;
-        }
     }
 }

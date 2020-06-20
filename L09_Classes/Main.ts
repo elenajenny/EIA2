@@ -11,6 +11,7 @@ namespace L09_Viruses {
     let background: ImageData;
 
 
+
     function handleLoad(_event: Event): void {
         console.log("particles moving");
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -28,7 +29,7 @@ namespace L09_Viruses {
         createAntibody(4);
         createKillercell(4);
         createBloodcell(9);
-        // KillercellInfection(_event);
+        testPosition(_event);
 
 
         window.setInterval(update, 20);
@@ -45,17 +46,13 @@ namespace L09_Viruses {
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-        // }
-
-        // function drawPattern(): void {
         console.log("Bloodvessel");
+
         // Muster
         let pattern: CanvasRenderingContext2D = <CanvasRenderingContext2D>document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 40;
         pattern.canvas.height = 20;
 
-        // pattern.fillStyle = "hsla(0, 100%, 60%, 0.1)";
-        // pattern.fillRect(0, 0, pattern.canvas.width, pattern.canvas.height);
         pattern.beginPath();
         pattern.moveTo(0, 10);
         pattern.lineTo(10, 10);
@@ -68,17 +65,14 @@ namespace L09_Viruses {
         pattern.strokeStyle = "#FB0C01";
         pattern.stroke();
         crc2.fillStyle = <CanvasRenderingContext2D>crc2.createPattern(pattern.canvas, "repeat");
-        // crc2.fillRect(0, 0, 750, 400);
-
-        // let imagedata = crc2.getImageData(0, 0, pattern.canvas.width, pattern.canvas.height);
-        // crc2.putImageData(imagedata, 40, 20);
-
+        crc2.fillRect(0, 0, 750, 400);
 
         pattern.closePath();
         pattern.restore();
 
         background = crc2.getImageData(0, 0, 750, 400);
     }
+
 
     function createVirus(_nVirus: number): void {
         console.log("Create Virus");
@@ -141,38 +135,34 @@ namespace L09_Viruses {
     }
 
 
-    // function KillercellInfection(_event: Event): void {
-    //     // Bereich in dem der Virus auf die Killerzelle trifft 
-    //     let virus:
-    //         let virusposition: Vector = new Vector (Virus.position.x);
-    //     let humancellHit: Killercell | null = getKillercellHit(hotspot);
-    //     for (let virus of viruses) {
-    //         // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
-    //         if (humancellHit) {
-    //             startInfection(virus);
-    //         }
-    //     }
-    //     function getKillercellHit(_virusposition: Vector): Killercell | null {
-    //         for (let killercell of killercells) {
-    //             if (killercell.isHit(_virusposition))
-    //                 return killercell;
-    //         }
-    //         return null;
-    //     }
+    function testPosition(_event: Event): void {
+        // Bereich in dem der Virus auf die Killerzelle trifft 
+        for (let virus of viruses) {
+            let humancellHit: Killercell | null = getKillercellHit(virus.position);
 
-    //     function startInfection(_virus: Virus): void {
+            // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
+            if (humancellHit) {
+                getKillercellHit(virus.position);
+            }
+        }
+    }
+    function startInfection(): void {
 
-    //         window.setTimeout(function (): void {
-    //             endInfection(_virus);
-    //         },                5000);
-    //     }
+        window.setTimeout(function (): void {
+           console.log("setTimeout");
+        },                5000);
+    }
 
-        // function endInfection(_virus: Virus) {
-        //     console.log("hallo");
-        //     }
-        // }
-
-
-
-
-}
+    function getKillercellHit(_virusposition: Vector): Killercell | null {
+        for (let killercell of killercells) {
+            if (killercell.isHit(_virusposition)) {
+                startInfection();
+                return killercell;
+            }  
+        }
+        return null;
+    }
+    // function endInfection(_virus: Virus) {
+    //     console.log("hallo");
+    // }
+} 
