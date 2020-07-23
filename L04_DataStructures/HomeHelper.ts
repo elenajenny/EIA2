@@ -40,7 +40,6 @@ namespace L04_HomeHelper {
 
             switch (entry[0]) {
                 case "Einkauf":
-                
                 order.innerHTML = "" + entry[1] + " " + price * portion + "€" + " ";
                 let unit: string = String(item.getAttribute("unit"));
                 console.log("unit:" + unit);
@@ -55,8 +54,11 @@ namespace L04_HomeHelper {
                 case "Supermarkt":
                 order.innerHTML += " " + entry[1];
                 break;
-
-                case "Haushalt":
+            }
+        }
+    }
+}
+case "Haushalt":
                 order.innerHTML += "<br>" + "" + entry[1] + " " + price + "€" + " ";
                 break;
 
@@ -71,8 +73,4 @@ namespace L04_HomeHelper {
                 case "Zahlung":
                 order.innerHTML += "<br>" + "" + entry[1];
                 break;
-                }
-        
-        }
-    }
-}
+                

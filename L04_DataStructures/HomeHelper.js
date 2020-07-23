@@ -38,20 +38,20 @@ var L04_HomeHelper;
                 case "Supermarkt":
                     order.innerHTML += " " + entry[1];
                     break;
-                case "Haushalt":
-                    order.innerHTML += "<br>" + "" + entry[1] + " " + price + "€" + " ";
-                    break;
-                case "Bank":
-                    order.innerHTML += "<br>" + "" + entry[1] + " " + price + "€" + "|";
-                    break;
-                case "Amount":
-                    order.innerHTML += " " + entry[1] + "€";
-                    break;
-                case "Zahlung":
-                    order.innerHTML += "<br>" + "" + entry[1];
-                    break;
             }
         }
     }
 })(L04_HomeHelper || (L04_HomeHelper = {}));
+"Haushalt";
+order.innerHTML += "<br>" + "" + entry[1] + " " + price + "€" + " ";
+break;
+"Bank";
+order.innerHTML += "<br>" + "" + entry[1] + " " + price + "€" + "|";
+break;
+"Amount";
+order.innerHTML += " " + entry[1] + "€";
+break;
+"Zahlung";
+order.innerHTML += "<br>" + "" + entry[1];
+break;
 //# sourceMappingURL=HomeHelper.js.map

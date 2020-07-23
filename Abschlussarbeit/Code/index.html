@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="Main.js"></script>
     <title>MagicCanvas</title>
 </head>
 <body>
+    <div id="main">
+        <h1>Magic Canvas</h1>
+        <!-- linke Seite  -->
+        <button id="rules">rules</button>
+        <div class="color">
+            <div id="wand" class="wanddiv"></div>
+            <div id="red" class="redcolor"></div>
+            <div id="blue" class="bluecolor"></div>
+            <div id="green" class="greencolor"></div>
+            <div id="yellow" class="yellowcolor"></div>
+        </div>
+        <div class="forms"></div>
+        <p class="choose">Choose one</p>
+        <span id="position" class="positionclass">position</span>
+        <span id="rotate" class="rotateclass">rotate</span>
+        <button id="generate" class="generateclass">generate</button>
+
+        <!-- rechte Seite -->
+        <button id="delete" class="deleteclass">delete</button>
+        <input type="text" name="" id="" placeholder="enter name" class="inputclass"> </input>
+        <button id="save" class="saveclass">save</button>
+        <div id="pictures" class="pictureclass">
+            <h3>Latest pictures</h3>
+        </div>
+        <div class="canvassize">
+            <h3>canvas size</h3>
+            <input type="radio" name="canvassize" id="standard" checked>
+            <label for="standard">standard</label>
+            <input type="radio" name="canvassize" id="small">
+            <label for="small">small</label>
+            <input type="radio" name="canvassize" id="medium">
+            <label for="medium">medium</label>
+            <input type="radio" name="canvassize" id="large">
+            <label for="large">large</label>
+        </div>
+
+
+        <canvas width="750" height="400"></canvas>
+    </div>
+    
     
 </body>
+<footer class="footer">
+    In Zusammenarbeit mit Celine Schiebel
+</footer>
 </html>

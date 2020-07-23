@@ -4,11 +4,15 @@ namespace L_03HomeHelper {
     function handleLoad(_event: Event): void {
         console.log("Die Anwendung startet");
 
-        let slider: HTMLInputElement = <HTMLInputElement>document.querySelector("#amount");
-        slider.addEventListener("input", displayAmount);
+        // let slider: HTMLInputElement = <HTMLInputElement>document.querySelector("#amount");
+        // slider.addEventListener("input", displayAmount);
 
         let order: HTMLInputElement = <HTMLInputElement>document.querySelector("#form");
         order.addEventListener("change", displayOrder);
+
+        
+        displayAmount(_event);
+
     }
 
     function displayAmount(_event: Event): void {
@@ -17,9 +21,10 @@ namespace L_03HomeHelper {
 
         let text: HTMLElement = <HTMLElement>document.querySelector("#text");
         text.innerHTML = "Gewünschter Betrag:" + value + "€";
+
+        console.log("Gewünschter Betrag:" + value + "€");
     }
-
-
+    
 
     function displayOrder(_event: Event): void {
         let order: HTMLDivElement = <HTMLDivElement>document.querySelector("#list");

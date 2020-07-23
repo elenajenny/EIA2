@@ -1,0 +1,251 @@
+body {
+    font-size: medium;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    text-align: center;
+}
+
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-style: solid;
+    border-color: slategrey;
+    background-color: white;
+}
+
+.color {
+    border-style: solid;
+    border-color: slategrey;
+    background-color: white;
+    position: absolute;
+    width: 5%;
+    height: 30%;
+    top: 10%;
+}
+
+.forms {
+    /* die gezeichneten Elemente im div */
+    border-style: solid;
+    border-color: slategrey;
+    background-color: white;
+    position: absolute;
+    width: 5%;
+    height: 30%;
+    top: 45%;
+}
+
+.choose {
+    position: absolute;
+    top: 75%
+}
+
+.canvassize {
+    position: absolute;
+    border-style: solid;
+    border-color: slategrey;
+    background-color: white;
+    right: 1%;
+    width: 13%;
+    top: 70%;
+    padding: 1%;
+}
+
+.rotateclass {
+    position: absolute;
+    background-color: slategrey;
+    color: whitesmoke;
+    padding: 1%;
+    top: 80%;
+    left: 8%;
+    border-radius: 5px;
+}
+.rotateclass:hover{
+    border: solid;
+    border-color: black;
+}
+
+.positionclass {
+    position: absolute;
+    background-color: slategrey;
+    color: whitesmoke;
+    padding: 1%;
+    top: 80%;
+    left: 0.5%;
+    border-radius: 5px;
+}
+.positionclass:hover{
+    border: solid;
+    border-color: black;
+}
+.generateclass {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    background-color: steelblue;
+    color: whitesmoke;
+    border: none;
+    padding: 1%;
+    top: 80%;
+    right: 25%;
+    border-radius: 5px;
+}
+.generateclass:hover{
+    border: solid;
+    border-color: black;
+}
+.saveclass {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    background-color: steelblue;
+    color: whitesmoke;
+    border: none;
+    padding: 1%;
+    right: 1%;
+    top: 5%;
+    border-radius: 5px;
+}
+.saveclass:hover {
+    border: solid;
+    border-color: black;
+}
+.deleteclass {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    background-color: steelblue;
+    color: whitesmoke;
+    border: none;
+    padding: 1%;
+    right: 7%;
+    top: 5%;
+    border-radius: 5px;
+}
+.deleteclass:hover{
+    border: solid;
+    border-color: black;
+}
+.inputclass {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    border-color: slategrey;
+    top: 5%;
+    right: 15%;
+}
+.pictureclass {
+    position: absolute;
+    border-style: solid;
+    border-color: slategrey;
+    background-color: white;
+    right: 1%;
+    width: 13%;
+    height: 40%;
+    top: 22%;
+    padding: 1%;
+}
+.rulesclass {
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    background-color: steelblue;
+    color: whitesmoke;
+    border: none;
+    padding: 1%;
+    top: 2%;
+    border-radius: 5px;
+}
+.rulesclass:hover {
+    border: solid;
+    border-color: black;
+}
+
+/* Farben */
+.wanddiv {
+    position: relative;
+    top: 5%;
+    left: 16%;
+    width: 60%;
+    height: 10%;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 3px;
+}
+
+.wanddiv:hover {
+    border-color: black;
+}
+
+.redcolor {
+    position: relative;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #7F0909;
+    border-radius: 3px;
+}
+
+.redcolor:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+.bluecolor {
+    position: relative;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #000890;
+    border-radius: 3px;
+}
+
+.bluecolor:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+.greencolor {
+    position: relative;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #0D6217;
+    border-radius: 3px;
+}
+
+.greencolor:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+.yellowcolor {
+    position: relative;
+    top: 40%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #EEE117;
+    border-radius: 3px;
+}
+
+.yellowcolor:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+.footer {
+    position: absolute;
+    bottom: 1%;
+    font-size: small;
+}

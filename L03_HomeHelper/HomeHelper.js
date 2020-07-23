@@ -4,15 +4,17 @@ var L_03HomeHelper;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         console.log("Die Anwendung startet");
-        let slider = document.querySelector("#amount");
-        slider.addEventListener("input", displayAmount);
+        // let slider: HTMLInputElement = <HTMLInputElement>document.querySelector("#amount");
+        // slider.addEventListener("input", displayAmount);
         let order = document.querySelector("#form");
         order.addEventListener("change", displayOrder);
+        displayAmount(_event);
     }
     function displayAmount(_event) {
         let value = _event.target.value;
         let text = document.querySelector("#text");
         text.innerHTML = "Gewünschter Betrag:" + value + "€";
+        console.log("Gewünschter Betrag:" + value + "€");
     }
     function displayOrder(_event) {
         let order = document.querySelector("#list");
