@@ -11,15 +11,35 @@
     <div id="main">
         <h1>Magic Canvas</h1>
         <!-- linke Seite  -->
-        <button id="rules">rules</button>
+        <button id="rules" class="rulesclass">rules</button>
+        <div id="overlay" class="overlayclass">
+			<div id="overlayText" class="overlaytextclass">
+                Welcome to Hogwarts!
+                With the tools on the left side you can build your magic canvas. <br>
+
+                First you can choose the size of your canvas. 
+                Then choose the color, a symbol and one form of animation. <br>
+                Hit the generate button and your symbol will appear on the 
+                screen. You can do this as often as you want to. <br>
+                You can clear your canvas with the delete button or enter a name for your picture and click the save button, <br>
+                so you can continue your work later.
+                You can find your saved pictures on the right side.
+
+			</div>
+		</div>
         <div class="color">
-            <div id="wand" class="wanddiv"></div>
+            <div id="palette" class="palettediv"><img src="Bilder/color_lens-24px.svg" class="paletteclass"></i></div>
             <div id="red" class="redcolor"></div>
             <div id="blue" class="bluecolor"></div>
             <div id="green" class="greencolor"></div>
             <div id="yellow" class="yellowcolor"></div>
         </div>
-        <div class="forms"></div>
+        <div class="forms">
+            <img src="Bilder/lens-24px.svg" class="circleclass">
+            <img src="Bilder/change_history-24px.svg" class="triangleclass">
+            <img src="Bilder/crop_5_4-24px.svg" class="rectangleclass">
+            <img src="Bilder/flash_on-24px.svg" class="flashclass">
+        </div>
         <p class="choose">Choose one</p>
         <span id="position" class="positionclass">position</span>
         <span id="rotate" class="rotateclass">rotate</span>

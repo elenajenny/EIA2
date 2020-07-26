@@ -1,12 +1,36 @@
 body {
     font-size: medium;
     font-family: 'Courier New', Courier, monospace;
+    background-image: url("Bilder/wallpaper_hogwarts.jpeg");
 }
 
 h1 {
     text-align: center;
 }
+.overlayclass {
+    display: none;
+	position: fixed;
+	height: 100%;
+	width: 95%;
+	top: 0;
+	left: 8%;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255,255,255,0.8);
+	z-index: 10;
+}
+.overlaytextclass {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    font-size: large;
+}
 
+.paletteclass{
+    position: relative;
+    left: 20%;
+    bottom: 10%;
+}
 canvas {
     padding: 0;
     margin: auto;
@@ -24,7 +48,7 @@ canvas {
 .color {
     border-style: solid;
     border-color: slategrey;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     position: absolute;
     width: 5%;
     height: 30%;
@@ -35,23 +59,44 @@ canvas {
     /* die gezeichneten Elemente im div */
     border-style: solid;
     border-color: slategrey;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     position: absolute;
     width: 5%;
     height: 30%;
     top: 45%;
 }
+.circleclass {
+   width: 60%;
+   position: relative;
+   left: 20%;
+}
+.triangleclass{
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
+.rectangleclass {
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
+.flashclass {
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
 
 .choose {
     position: absolute;
-    top: 75%
+    top: 75%;
+    color: white;
 }
 
 .canvassize {
     position: absolute;
     border-style: solid;
     border-color: slategrey;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     right: 1%;
     width: 13%;
     top: 70%;
@@ -63,8 +108,8 @@ canvas {
     background-color: slategrey;
     color: whitesmoke;
     padding: 1%;
-    top: 80%;
-    left: 8%;
+    top: 90%;
+    left: 0.5%;
     border-radius: 5px;
 }
 .rotateclass:hover{
@@ -93,7 +138,7 @@ canvas {
     color: whitesmoke;
     border: none;
     padding: 1%;
-    top: 80%;
+    top: 90%;
     right: 25%;
     border-radius: 5px;
 }
@@ -145,7 +190,7 @@ canvas {
     position: absolute;
     border-style: solid;
     border-color: slategrey;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     right: 1%;
     width: 13%;
     height: 40%;
@@ -169,7 +214,7 @@ canvas {
 }
 
 /* Farben */
-.wanddiv {
+.palettediv {
     position: relative;
     top: 5%;
     left: 16%;
@@ -180,7 +225,7 @@ canvas {
     border-radius: 3px;
 }
 
-.wanddiv:hover {
+.palettediv:hover {
     border-color: black;
 }
 
