@@ -6,6 +6,7 @@ body {
 
 h1 {
     text-align: center;
+    color: white;
 }
 .overlayclass {
     display: none;
@@ -293,4 +294,5 @@ canvas {
     position: absolute;
     bottom: 1%;
     font-size: small;
+    color: white;
 }
