@@ -9,42 +9,26 @@ var MagicCanvas;
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
-        let rule = document.querySelector("#rules");
-        rule.addEventListener("click", rulesVisibility);
-        let standard = document.querySelector("#standard");
-        standard.addEventListener("click", handleCanvasSize);
-        let small = document.querySelector("#small");
-        small.addEventListener("click", handleCanvasSize);
-        let medium = document.querySelector("#medium");
-        medium.addEventListener("click", handleCanvasSize);
-        let large = document.querySelector("#large");
-        large.addEventListener("click", handleCanvasSize);
-        let generate = document.querySelector("#generate");
-        generate.addEventListener("click", generateSymbols);
+        document.querySelector("#rules").addEventListener("click", rulesVisibility);
+        document.querySelector("#standard").addEventListener("click", handleCanvasSize);
+        document.querySelector("#small").addEventListener("click", handleCanvasSize);
+        document.querySelector("#medium").addEventListener("click", handleCanvasSize);
+        document.querySelector("#large").addEventListener("click", handleCanvasSize);
+        document.querySelector("#generate").addEventListener("click", generateSymbols);
         // Klick auf Farbe
-        let palettecolor = document.querySelector("#paletteid");
-        palettecolor.addEventListener("click", setColor);
-        let redcolor = document.querySelector("#red");
-        redcolor.addEventListener("click", setColor);
-        let bluecolor = document.querySelector("#blue");
-        bluecolor.addEventListener("click", setColor);
-        let greencolor = document.querySelector("#green");
-        greencolor.addEventListener("click", setColor);
-        let yellowcolor = document.querySelector("#yellow");
-        yellowcolor.addEventListener("click", setColor);
+        document.querySelector("#paletteid").addEventListener("click", setColor);
+        document.querySelector("#red").addEventListener("click", setColor);
+        document.querySelector("#blue").addEventListener("click", setColor);
+        document.querySelector("#green").addEventListener("click", setColor);
+        document.querySelector("#yellow").addEventListener("click", setColor);
         // let deletebutton: HTMLElement = <HTMLElement>document.querySelector("#delete");
         // deletebutton.addEventListener("click", );
-        let savebutton = document.querySelector("#save");
-        savebutton.addEventListener("click", savePicture);
+        document.querySelector("#save").addEventListener("click", savePicture);
         // Klick auf die verschiedenen Form Icons
-        let circle = document.querySelector("#circleicon");
-        circle.addEventListener("click", setForm);
-        let triangle = document.querySelector("#triangleicon");
-        triangle.addEventListener("click", setForm);
-        let square = document.querySelector("#squareicon");
-        square.addEventListener("click", setForm);
-        let flash = document.querySelector("#flashicon");
-        flash.addEventListener("click", setForm);
+        document.querySelector("#circleicon").addEventListener("click", setForm);
+        document.querySelector("#triangleicon").addEventListener("click", setForm);
+        document.querySelector("#squareicon").addEventListener("click", setForm);
+        document.querySelector("#flashicon").addEventListener("click", setForm);
     }
     function rulesVisibility() {
         console.log("show rules");
