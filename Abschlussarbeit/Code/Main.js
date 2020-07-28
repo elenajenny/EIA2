@@ -9,21 +9,42 @@ var MagicCanvas;
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
+        let rule = document.querySelector("#rules");
+        rule.addEventListener("click", rulesVisibility);
+        let standard = document.querySelector("#standard");
+        standard.addEventListener("click", handleCanvasSize);
+        let small = document.querySelector("#small");
+        small.addEventListener("click", handleCanvasSize);
+        let medium = document.querySelector("#medium");
+        medium.addEventListener("click", handleCanvasSize);
+        let large = document.querySelector("#large");
+        large.addEventListener("click", handleCanvasSize);
+        let generate = document.querySelector("#generate");
+        generate.addEventListener("click", generateSymbols);
         // Klick auf Farbe
         let palettecolor = document.querySelector("#paletteid");
         palettecolor.addEventListener("click", setColor);
-        document.querySelector("#red").addEventListener("click", setColor);
-        document.querySelector("#blue").addEventListener("click", setColor);
-        document.querySelector("#green").addEventListener("click", setColor);
-        document.querySelector("#yellow").addEventListener("click", setColor);
-        let rule = document.querySelector("#rules");
-        rule.addEventListener("click", rulesVisibility);
-        document.querySelector("#standard").addEventListener("click", handleCanvasSize);
-        document.querySelector("#small").addEventListener("click", handleCanvasSize);
-        document.querySelector("#medium").addEventListener("click", handleCanvasSize);
-        document.querySelector("#large").addEventListener("click", handleCanvasSize);
-        let generate = document.querySelector("#generate");
-        generate.addEventListener("click", generateSymbols);
+        let redcolor = document.querySelector("#red");
+        redcolor.addEventListener("click", setColor);
+        let bluecolor = document.querySelector("#blue");
+        bluecolor.addEventListener("click", setColor);
+        let greencolor = document.querySelector("#green");
+        greencolor.addEventListener("click", setColor);
+        let yellowcolor = document.querySelector("#yellow");
+        yellowcolor.addEventListener("click", setColor);
+        // Klick auf die verschiedenen Form Icons
+        let circle = document.querySelector("#circleicon");
+        circle.addEventListener("click", setForm);
+        let triangle = document.querySelector("#triangleicon");
+        triangle.addEventListener("click", setForm);
+        let square = document.querySelector("#squareicon");
+        square.addEventListener("click", setForm);
+        let flash = document.querySelector("#flashicon");
+        flash.addEventListener("click", setForm);
+        // let deletebutton: HTMLElement = <HTMLElement>document.querySelector("#delete");
+        // deletebutton.addEventListener("click", );
+        let savebutton = document.querySelector("#save");
+        savebutton.addEventListener("click", savePicture);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -110,7 +131,7 @@ var MagicCanvas;
     function setColor(event) {
         //Element wird über das Event mithilfe der ID geholt
         let actualid = event.target.getAttribute("id");
-        //wenn die ID des childs der Farbe entspricht, dann wird diese Farbe mit der selected color überschrieben
+        //wenn die ID des childs der Farbe entspricht, dann wird diese Farbe mit der überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
         }
@@ -124,6 +145,14 @@ var MagicCanvas;
             selectedcolor = "#EEE117";
         }
         console.log("Event:" + event.target.getAttribute("id"));
+    }
+    function setForm() {
+        console.log("Hallo");
+    }
+    function savePicture() {
+        console.log("Hallihallo");
+        let name;
+        document.querySelector;
     }
 })(MagicCanvas || (MagicCanvas = {}));
 //# sourceMappingURL=Main.js.map
