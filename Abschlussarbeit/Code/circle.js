@@ -14,14 +14,15 @@ var MagicCanvas;
         draw() {
             let r = 20;
             MagicCanvas.crc2.save();
-            MagicCanvas.crc2.translate(this.position.x, this.position.y);
-            // Skalierung vertikal und horizontal
-            MagicCanvas.crc2.scale(this.size, this.size);
-            MagicCanvas.crc2.translate(-50, -50);
+            MagicCanvas.crc2.translate(10, 10);
+            // 
+            MagicCanvas.crc2.scale(10, 10);
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.arc(0, 0, r, 0, 2 * Math.PI);
+            MagicCanvas.crc2.closePath();
             MagicCanvas.crc2.restore();
-            MagicCanvas.crc2.strokeStyle = "#FFFFFF";
+            //Linienfarbe
+            MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();
         }
     }
