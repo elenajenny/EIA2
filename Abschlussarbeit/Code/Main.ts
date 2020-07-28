@@ -15,48 +15,34 @@ namespace MagicCanvas {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
         
-        let rule: HTMLElement = <HTMLElement>document.querySelector("#rules");
-        rule.addEventListener("click", rulesVisibility);
+        document.querySelector("#rules").addEventListener("click", rulesVisibility);
+        document.querySelector("#standard").addEventListener("click", handleCanvasSize);
+        document.querySelector("#small").addEventListener("click", handleCanvasSize);
+        document.querySelector("#medium").addEventListener("click", handleCanvasSize);
+        document.querySelector("#large").addEventListener("click", handleCanvasSize);
 
-        let standard: HTMLElement | null = <HTMLElement>document.querySelector("#standard");
-        standard.addEventListener("click", handleCanvasSize);
-        let small: HTMLElement | null = <HTMLElement>document.querySelector("#small");
-        small.addEventListener("click", handleCanvasSize);
-        let medium: HTMLElement | null = <HTMLElement>document.querySelector("#medium");
-        medium.addEventListener("click", handleCanvasSize);
-        let large: HTMLElement | null = <HTMLElement>document.querySelector("#large");
-        large.addEventListener("click", handleCanvasSize);
-
-        let generate: HTMLElement = <HTMLElement>document.querySelector("#generate");
-        generate.addEventListener("click", generateSymbols);
+        document.querySelector("#generate").addEventListener("click", generateSymbols);
 
         // Klick auf Farbe
-        let palettecolor: HTMLElement | null = <HTMLElement>document.querySelector("#paletteid");
-        palettecolor.addEventListener("click", setColor);
-        let redcolor: HTMLElement | null = <HTMLElement>document.querySelector("#red");
-        redcolor.addEventListener("click", setColor);
-        let bluecolor: HTMLElement | null = <HTMLElement>document.querySelector("#blue");
-        bluecolor.addEventListener("click", setColor);
-        let greencolor: HTMLElement | null = <HTMLElement>document.querySelector("#green");
-        greencolor.addEventListener("click", setColor);
-        let yellowcolor: HTMLElement | null = <HTMLElement>document.querySelector("#yellow");
-        yellowcolor.addEventListener("click", setColor);
+        document.querySelector("#paletteid") .addEventListener("click", setColor);
+        document.querySelector("#red").addEventListener("click", setColor);
+        document.querySelector("#blue").addEventListener("click", setColor);
+        document.querySelector("#green").addEventListener("click", setColor);
+        document.querySelector("#yellow").addEventListener("click", setColor);
 
-        // Klick auf die verschiedenen Form Icons
-        let circle: HTMLElement = <HTMLElement>document.querySelector("#circleicon");
-        circle.addEventListener("click", setForm);
-        let triangle: HTMLElement = <HTMLElement>document.querySelector("#triangleicon");
-        triangle.addEventListener("click", setForm);
-        let square: HTMLElement = <HTMLElement>document.querySelector("#squareicon");
-        square.addEventListener("click", setForm);
-        let flash: HTMLElement = <HTMLElement>document.querySelector("#flashicon");
-        flash.addEventListener("click", setForm);
-
+      
         // let deletebutton: HTMLElement = <HTMLElement>document.querySelector("#delete");
         // deletebutton.addEventListener("click", );
 
-        let savebutton: HTMLElement = <HTMLElement>document.querySelector("#save");
-        savebutton.addEventListener("click", savePicture);
+        document.querySelector("#save").addEventListener("click", savePicture);
+      
+
+        // Klick auf die verschiedenen Form Icons
+        document.querySelector("#circleicon").addEventListener("click", setForm);
+        document.querySelector("#triangleicon").addEventListener("click", setForm);
+        document.querySelector("#squareicon").addEventListener("click", setForm);
+        document.querySelector("#flashicon").addEventListener("click", setForm);
+
     }
 
     function rulesVisibility(): void {

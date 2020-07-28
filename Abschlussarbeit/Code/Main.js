@@ -32,6 +32,10 @@ var MagicCanvas;
         greencolor.addEventListener("click", setColor);
         let yellowcolor = document.querySelector("#yellow");
         yellowcolor.addEventListener("click", setColor);
+        // let deletebutton: HTMLElement = <HTMLElement>document.querySelector("#delete");
+        // deletebutton.addEventListener("click", );
+        let savebutton = document.querySelector("#save");
+        savebutton.addEventListener("click", savePicture);
         // Klick auf die verschiedenen Form Icons
         let circle = document.querySelector("#circleicon");
         circle.addEventListener("click", setForm);
@@ -41,10 +45,6 @@ var MagicCanvas;
         square.addEventListener("click", setForm);
         let flash = document.querySelector("#flashicon");
         flash.addEventListener("click", setForm);
-        // let deletebutton: HTMLElement = <HTMLElement>document.querySelector("#delete");
-        // deletebutton.addEventListener("click", );
-        let savebutton = document.querySelector("#save");
-        savebutton.addEventListener("click", savePicture);
     }
     function rulesVisibility() {
         console.log("show rules");
