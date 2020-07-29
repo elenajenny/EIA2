@@ -2,33 +2,65 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
-    let moveables = [];
-    let selectedcolor = "#FF0000";
+    // ausgwählte Farbe zum Füllen
+    let selectedcolor = "#ff0000";
+    let selectedform = "circle";
+    let selectedanimation = "position";
+    let symbols = [];
+    let chosenName;
+    // Ausprobieren
+    // let canvasheight: number;
+    // let canvaswidth: number;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
-        document.querySelector("#rules").addEventListener("click", rulesVisibility);
-        document.querySelector("#standard").addEventListener("click", handleCanvasSize);
-        document.querySelector("#small").addEventListener("click", handleCanvasSize);
-        document.querySelector("#medium").addEventListener("click", handleCanvasSize);
-        document.querySelector("#large").addEventListener("click", handleCanvasSize);
-        document.querySelector("#generate").addEventListener("click", generateSymbols);
         // Klick auf Farbe
-        document.querySelector("#paletteid").addEventListener("click", setColor);
-        document.querySelector("#red").addEventListener("click", setColor);
-        document.querySelector("#blue").addEventListener("click", setColor);
-        document.querySelector("#green").addEventListener("click", setColor);
-        document.querySelector("#yellow").addEventListener("click", setColor);
-        // let deletebutton: HTMLElement = <HTMLElement>document.querySelector("#delete");
-        // deletebutton.addEventListener("click", );
-        document.querySelector("#save").addEventListener("click", savePicture);
+        let red = document.querySelector("#red");
+        red.addEventListener("click", setColor);
+        let blue = document.querySelector("#blue");
+        blue.addEventListener("click", setColor);
+        let green = document.querySelector("#green");
+        green.addEventListener("click", setColor);
+        let yellow = document.querySelector("#yellow");
+        yellow.addEventListener("click", setColor);
+        // Klick auf Regel Button
+        let rules = document.querySelector("#rules");
+        rules.addEventListener("click", rulesVisibility);
+        // Generate
+        let generate = document.querySelector("#generate");
+        generate.addEventListener("click", generateSymbols);
+        // Klick auf Canvas Größe
+        let standard = document.querySelector("#standard");
+        standard.addEventListener("click", handleCanvasSize);
+        let small = document.querySelector("#small");
+        small.addEventListener("click", handleCanvasSize);
+        let medium = document.querySelector("#medium");
+        medium.addEventListener("click", handleCanvasSize);
+        let large = document.querySelector("#large");
+        large.addEventListener("click", handleCanvasSize);
+        // Delete Button, um den Canvas zu säubern
+        let deleteBtn = document.querySelector("#delete");
+        deleteBtn.addEventListener("click", clearCanvas);
+        let save = document.querySelector("#save");
+        save.addEventListener("click", savePicture);
+        let picture = document.querySelector("#picturename");
+        picture.addEventListener("oninput", enterName);
         // Klick auf die verschiedenen Form Icons
-        document.querySelector("#circleicon").addEventListener("click", setForm);
-        document.querySelector("#triangleicon").addEventListener("click", setForm);
-        document.querySelector("#squareicon").addEventListener("click", setForm);
-        document.querySelector("#flashicon").addEventListener("click", setForm);
+        let circle = document.querySelector("#circleicon");
+        circle.addEventListener("click", setForm);
+        let triangle = document.querySelector("#triangleicon");
+        triangle.addEventListener("click", setForm);
+        let square = document.querySelector("#squareicon");
+        square.addEventListener("click", setForm);
+        let flash = document.querySelector("#flashicon");
+        flash.addEventListener("click", setForm);
+        // Klick auf die verschiedenen Animationsformen
+        let position = document.querySelector("#position");
+        position.addEventListener("click", setAnimation);
+        let rotate = document.querySelector("#rotate");
+        rotate.addEventListener("click", setAnimation);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -41,81 +73,42 @@ var MagicCanvas;
         }
     }
     function handleCanvasSize() {
-        console.log("canvassize");
-        let canvas = document.querySelector("canvas");
+        // Canvas sizes
         let standardsize = document.querySelector("#standard");
         let smallsize = document.querySelector("#small");
         let mediumsize = document.querySelector("#medium");
         let largesize = document.querySelector("#large");
+        let canvas = document.querySelector("canvas");
         if (standardsize.checked == true) {
-            canvas.setAttribute("style", "width: 700px");
-            canvas.setAttribute("style", "height: 400px");
+            canvas.setAttribute("style", "width: 500px");
+            canvas.setAttribute("style", "height: 300px");
             console.log("standard");
         }
         if (smallsize.checked == true) {
-            canvas.setAttribute("style", "width: 400px");
             console.log("small");
+            canvas.setAttribute("style", "width: 450px");
+            canvas.setAttribute("style", "height: 250px");
         }
         if (mediumsize.checked == true) {
-            canvas.setAttribute("style", "width: 600px");
+            canvas.setAttribute("style", "width: 550px");
+            canvas.setAttribute("style", "height: 350px");
         }
         if (largesize.checked == true) {
-            canvas.setAttribute("style", "width: 800px");
+            canvas.setAttribute("style", "width: 600px");
+            canvas.setAttribute("style", "height: 400px");
         }
     }
     function generateSymbols(_event) {
         console.log("generate Symbols");
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
-        //Kreis
-        // circle.draw();
-        let r = 5;
-        MagicCanvas.crc2.save();
-        MagicCanvas.crc2.translate(40, 40);
-        // Skalierung vertikal und horizontal
-        MagicCanvas.crc2.scale(5, 5);
-        // crc2.translate(-50, -50);
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.arc(0, 0, r, 0, 2 * Math.PI);
-        MagicCanvas.crc2.closePath();
-        MagicCanvas.crc2.restore();
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
-        //Triangle
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.moveTo(70, 70);
-        MagicCanvas.crc2.lineTo(10, 70);
-        MagicCanvas.crc2.lineTo(10, 25);
-        MagicCanvas.crc2.closePath();
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
-        //Rectangle
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.rect(10, 10, 55, 40);
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
-        // Flash
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.translate(40, 40);
-        MagicCanvas.crc2.moveTo(0, 0);
-        MagicCanvas.crc2.lineTo(20, 0);
-        MagicCanvas.crc2.lineTo(15, 25);
-        MagicCanvas.crc2.lineTo(25, 25);
-        MagicCanvas.crc2.lineTo(10, 50);
-        MagicCanvas.crc2.moveTo(0, 0);
-        MagicCanvas.crc2.lineTo(0, 30);
-        MagicCanvas.crc2.lineTo(12, 30);
-        MagicCanvas.crc2.lineTo(10, 50);
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
+        let element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
+        symbols.push(element);
+        element.draw();
     }
     function setColor(event) {
-        //Element wird über das Event mithilfe der ID geholt
+        // Element wird über das Event mit Hilfe der id geholt 
         let actualid = event.target.getAttribute("id");
-        //wenn die ID des childs der Farbe entspricht, dann wird diese Farbe mit der überschrieben
+        // wenn die id des childs zb red ist dann wird die farbe mit selectedcolor überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
         }
@@ -129,14 +122,101 @@ var MagicCanvas;
             selectedcolor = "#EEE117";
         }
         console.log("Event:" + event.target.getAttribute("id"));
+        console.log(selectedcolor);
     }
-    function setForm() {
-        console.log("Hallo");
+    function setForm(event) {
+        // console.log("hallo");
+        let formid = event.currentTarget.getAttribute("id");
+        if (formid == "circleicon") {
+            selectedform = "circle";
+            console.log("rufe drawcircle auf");
+        }
+        else if (formid == "triangleicon") {
+            selectedform = "triangle";
+            console.log("rufe drawtriangle auf");
+        }
+        else if (formid == "squareicon") {
+            selectedform = "square";
+            console.log("rufe drawsquare auf");
+        }
+        else if (formid == "flashicon") {
+            selectedform = "flash";
+            console.log("rufe drawflash auf");
+        }
+        console.log(selectedform);
     }
-    function savePicture() {
-        console.log("Hallihallo");
-        let name;
-        document.querySelector;
+    function setAnimation(event) {
+        let animationid = event.currentTarget.getAttribute("id");
+        if (animationid == "position") {
+            selectedanimation = "position";
+        }
+        if (animationid == "rotate") {
+            selectedanimation = "rotate";
+        }
+        console.log(selectedanimation);
+    }
+    function clearCanvas() {
+        console.log("delete");
+        // Array leeren
+        let index = MagicCanvas.canvasElement[length];
+        symbols.splice(index, 1);
+        // // Store the current transformation matrix
+        // crc2.save();
+        // // Use the identity matrix while clearing the canvas
+        // crc2.setTransform(1, 0, 0, 1, 0, 0);
+        // crc2.clearRect(0, 0, canvaswidth, canvasheight);
+        // // Restore the transform
+        // crc2.restore();
+    }
+    function enterName() {
+        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
+        // chosenName = name;
+        // console.log("name:" + chosenName);
+        let name = document.getElementById("#picturename").value;
+        document.getElementById("pictures").innerHTML = "You wrote: " + name;
+    }
+    function savePicture(event) {
+        // let name: any;
+        // (document.querySelector("#picturename") as HTMLInputElement).value = name;
+        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
+        // let namepicture: string = event.currentTarget.value;
+        console.log("name:" + chosenName);
+    }
+    function draganddrop(_event) {
+        console.log("it is draganddropping");
+        // Funktion nacher so aufrufen
+        // symbols.onmousedown = function(event): void {
+        //     // (1) prepare to moving: make absolute and on top by z-index
+        //     symbols.style.position = "absolute";
+        //     symbols.style.zIndex = 1000;
+        //     // move it out of any current parents directly into body
+        //     // to make it positioned relative to the body
+        //     document.body.append(symbols);
+        //     // centers the symbols at (pageX, pageY) coordinates
+        //     function moveAt(pageX, pageY): void {
+        //       symbols.style.left = pageX - symbols.offsetWidth / 2 + "px";
+        //       symbols.style.top = pageY - symbols.offsetHeight / 2 + "px";
+        //     }
+        //     // move our absolutely positioned symbols under the pointer
+        //     moveAt(event.pageX, event.pageY);
+        //     function onMouseMove(event): void {
+        //       moveAt(event.pageX, event.pageY);
+        //     }
+        //     // (2) move the symbols on mousemove
+        //     document.addEventListener("mousemove", onMouseMove);
+        //     // (3) drop the symbols, remove unneeded handlers
+        //     symbols.onmouseup = function() {
+        //       document.removeEventListener("mousemove", onMouseMove);
+        //       symbols.onmouseup = null;
+        //     };
+        //   };
     }
 })(MagicCanvas || (MagicCanvas = {}));
+// Klasse für alle Canvas Elemente
+// Main: alle Werte holen (Farbe, Form, Animationsform)
+// die Infos werden mit new Canvaselement mit paramtern mitgegeben (müssen im Constructor 
+// vorher auch mitgegeben werden)
+// neues Element wird in ein Array gepusht --> alle Canvas Elmente
+// dieses array läuft durch eine Dauerschleife (für alle die sich bewegen oder rotieren)
+// Optional: alle Elemente hören sich auf zu bewegen während das neue ELement verschoben wird
 //# sourceMappingURL=Main.js.map

@@ -3,77 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Canvas</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <script src="Vector.js"></script>
-    <script src="circle.js"></script> -->
+    <script src="Vector.js"></script>
+    <script src="CanvasElement.js"></script>
     <script src="Main.js"></script>
-    
-
-    <title>MagicCanvas</title>
 </head>
+
 <body>
     <div id="main">
         <h1>Magic Canvas</h1>
-        <!-- linke Seite  -->
+        <!--Linke Seite-->
         <button id="rules" class="rulesclass">rules</button>
         <div id="overlay" class="overlayclass">
-			<div id="overlayText" class="overlaytextclass">
+            <div id="overlayText" class="overlaytextclass">
                 Welcome to Hogwarts!
-                With the tools on the left side you can build your magic canvas. <br>
-
-                First you can choose the size of your canvas. 
-                Then choose the color, a symbol and one form of animation. <br>
-                Hit the generate button and your symbol will appear on the 
-                screen. You can do this as often as you want to. <br>
-                You can clear your canvas with the delete button or enter a name for your picture and click the save button, <br>
-                so you can continue your work later.
+                <br>
+                You can build your own magic canvas with the tools on the left side.
+                Choose a canvas size, a color and a symbol and one form of animation.
+                <br>
+                Now hit the generate button and your symbol will apear on the canvas.
+                You can do this as many times as you like. 
+                <br>
+                You can also clear your canvas with the delete button.
+                Enter a name for your finished picture and press "save" to save it.
+                <br>
                 You can find your saved pictures on the right side.
+            </div>
+        </div>
+        <canvas width="500" height="300"></canvas>
 
-			</div>
-		</div>
         <div class="color">
-            <div id="palette" class="palettediv"><img src="Bilder/color_lens-24px.svg" class="paletteclass"></i></div>
             <div id="red" class="redcolor"></div>
             <div id="blue" class="bluecolor"></div>
             <div id="green" class="greencolor"></div>
             <div id="yellow" class="yellowcolor"></div>
         </div>
+
         <div class="forms">
-            <img src="Bilder/lens-24px.svg" class="circleclass">
-            <img src="Bilder/change_history-24px.svg" class="triangleclass">
-            <img src="Bilder/crop_5_4-24px.svg" class="rectangleclass">
-            <img src="Bilder/flash_on-24px.svg" class="flashclass">
+            <div id="circleicon"><img src="Bilder/circle.svg" class="circleclass"></div>
+            <div id="triangleicon"><img src="Bilder/triangle.svg" class="triangleclass"></div>
+            <div id="squareicon"><img src="Bilder/square.svg" class="rectangleclass"></div>
+            <div id="flashicon"><img src="Bilder/flash.svg" class="flashclass"></div>
         </div>
-        <p class="choose">Choose one</p>
+
+        <p class="choose">Choose one:</p>
         <span id="position" class="positionclass">position</span>
         <span id="rotate" class="rotateclass">rotate</span>
         <button id="generate" class="generateclass">generate</button>
 
-        <!-- rechte Seite -->
+        <!--Rechte Seite-->
         <button id="delete" class="deleteclass">delete</button>
-        <input type="text" name="" id="picturename" placeholder="enter name" class="inputclass"> </input>
+        
+        <input type="text" placeholder="Enter name" class="inputclass" id="picturename">
         <button id="save" class="saveclass">save</button>
+        
         <div id="pictures" class="pictureclass">
             <h3>Latest pictures</h3>
         </div>
+
+       
         <div class="canvassize">
-            <input type="radio" name="canvassize" id="standard" checked>
-            <label for="standard">standard</label>
-            <input type="radio" name="canvassize" id="small">
-            <label for="small">small</label>
-            <input type="radio" name="canvassize" id="medium">
-            <label for="medium">medium</label>
-            <input type="radio" name="canvassize" id="large">
-            <label for="large">large</label>
+            <h3>Canvas Size</h3>
+                <input type="radio" name="canvassize" value="standard" id="standard" checked>
+                <label for="standard">standard</label>
+                <br>
+                <input type="radio" name="canvassize" value="small" id="small">
+                <label for="small">small</label>
+                <br>
+                <input type="radio" name="canvassize" value="medium" id="medium">
+                <label for="medium">medium</label>
+                <br>
+                <input type="radio" name="canvassize" value="large" id="large">
+                <label for="large">large</label>
         </div>
-
-
-        <canvas width="700" height="400"></canvas>
     </div>
-    
-    
 </body>
-<footer class="footer">
-    In Zusammenarbeit mit Celine Schiebel
+
+<footer>
+  <p class="footer">In Zusammenarbeit mit Celine Schiebel</p>
 </footer>
+
 </html>

@@ -103,7 +103,7 @@ canvas {
     top: 70%;
     padding: 1%;
 }
-
+/* Animation Buttons */
 .rotateclass {
     position: absolute;
     background-color: slategrey;
@@ -131,6 +131,7 @@ canvas {
     border: solid;
     border-color: black;
 }
+/* generate Button */
 .generateclass {
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
@@ -147,6 +148,7 @@ canvas {
     border: solid;
     border-color: black;
 }
+/* save und delete rechts oben in der Ecke */
 .saveclass {
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
@@ -215,20 +217,6 @@ canvas {
 }
 
 /* Farben */
-.palettediv {
-    position: relative;
-    top: 5%;
-    left: 16%;
-    width: 60%;
-    height: 10%;
-    border-style: solid;
-    border-color: gray;
-    border-radius: 3px;
-}
-
-.palettediv:hover {
-    border-color: black;
-}
 
 .redcolor {
     position: relative;
@@ -292,7 +280,7 @@ canvas {
 
 .footer {
     position: absolute;
-    bottom: 1%;
+    bottom: 0.5%;
     font-size: small;
     color: white;
 }
