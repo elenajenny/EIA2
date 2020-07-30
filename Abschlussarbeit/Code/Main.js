@@ -7,27 +7,21 @@ var MagicCanvas;
     let selectedcolor = "#ff0000";
     let selectedform = "circle";
     let selectedanimation = "position";
-    let symbols = [];
+    MagicCanvas.symbols = [];
+    let timeOut;
+    let animationRunning = false;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
-        // Klick auf Farbe
-        let red = document.querySelector("#red");
-        red.addEventListener("click", setColor);
-        let blue = document.querySelector("#blue");
-        blue.addEventListener("click", setColor);
-        let green = document.querySelector("#green");
-        green.addEventListener("click", setColor);
-        let yellow = document.querySelector("#yellow");
-        yellow.addEventListener("click", setColor);
-        // Klick auf Regel Button
-        let rules = document.querySelector("#rules");
-        rules.addEventListener("click", rulesVisibility);
-        // Generate
-        let generate = document.querySelector("#generate");
-        generate.addEventListener("click", generateSymbols);
+        //Klick auf Hintergrundfarbe
+        let white = document.querySelector("#white");
+        white.addEventListener("click", setBackground);
+        let black = document.querySelector("#black");
+        black.addEventListener("click", setBackground);
+        let beige = document.querySelector("#beige");
+        beige.addEventListener("click", setBackground);
         // Klick auf Canvas Größe
         let standard = document.querySelector("#standard");
         standard.addEventListener("click", handleCanvasSize);
@@ -37,11 +31,15 @@ var MagicCanvas;
         medium.addEventListener("click", handleCanvasSize);
         let large = document.querySelector("#large");
         large.addEventListener("click", handleCanvasSize);
-        // Delete Button, um den Canvas zu säubern
-        let deleteBtn = document.querySelector("#delete");
-        deleteBtn.addEventListener("click", clearCanvas);
-        let save = document.querySelector("#save");
-        save.addEventListener("click", savePicture);
+        // Klick auf Farbe
+        let red = document.querySelector("#red");
+        red.addEventListener("click", setColor);
+        let blue = document.querySelector("#blue");
+        blue.addEventListener("click", setColor);
+        let green = document.querySelector("#green");
+        green.addEventListener("click", setColor);
+        let yellow = document.querySelector("#yellow");
+        yellow.addEventListener("click", setColor);
         // Klick auf die verschiedenen Form Icons
         let circle = document.querySelector("#circleicon");
         circle.addEventListener("click", setForm);
@@ -51,12 +49,30 @@ var MagicCanvas;
         square.addEventListener("click", setForm);
         let flash = document.querySelector("#flashicon");
         flash.addEventListener("click", setForm);
+        // Klick auf Regel Button
+        let rules = document.querySelector("#rules");
+        rules.addEventListener("click", rulesVisibility);
+        // Generate
+        let generate = document.querySelector("#generate");
+        generate.addEventListener("click", generateSymbols);
+        // Animationen
+        let start = document.querySelector("#startanimation");
+        start.addEventListener("click", animateElementsStart);
+        let stop = document.querySelector("#stopanimation");
+        stop.addEventListener("click", animateElementsStop);
+        // Delete Button, um den Canvas zu säubern
+        let deleteBtn = document.querySelector("#delete");
+        deleteBtn.addEventListener("click", clearCanvas);
+        let save = document.querySelector("#save");
+        save.addEventListener("click", savePicture);
         // Klick auf die verschiedenen Animationsformen
         let position = document.querySelector("#position");
         position.addEventListener("click", setAnimation);
         let rotate = document.querySelector("#rotate");
         rotate.addEventListener("click", setAnimation);
-        canvas.addEventListener("click", draganddrop);
+        canvas.addEventListener("mousedown", pickSymbol);
+        canvas.addEventListener("mouseup", placeSymbol);
+        canvas.addEventListener("mousemove", dragSymbol);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -98,12 +114,32 @@ var MagicCanvas;
         console.log("generate Symbols");
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
         let element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
-        symbols.push(element);
+        MagicCanvas.symbols.push(element);
         if (selectedanimation == "rotate") {
             MagicCanvas.crc2.restore();
             element.rotate();
         }
         element.draw();
+    }
+    function setBackground() {
+        let white = document.querySelector("#white");
+        let black = document.querySelector("#black");
+        let beige = document.querySelector("#beige");
+        if (white.checked == true) {
+            MagicCanvas.crc2.fillStyle = "#FFFFFF";
+            MagicCanvas.crc2.fill();
+            MagicCanvas.crc2.fillRect(0, 0, MagicCanvas.crc2.canvas.width, MagicCanvas.crc2.canvas.height);
+        }
+        if (black.checked == true) {
+            MagicCanvas.crc2.fillStyle = "#000000";
+            MagicCanvas.crc2.fill();
+            MagicCanvas.crc2.fillRect(0, 0, MagicCanvas.crc2.canvas.width, MagicCanvas.crc2.canvas.height);
+        }
+        if (beige.checked == true) {
+            MagicCanvas.crc2.fillStyle = "#FFE3BD";
+            MagicCanvas.crc2.fill();
+            MagicCanvas.crc2.fillRect(0, 0, MagicCanvas.crc2.canvas.width, MagicCanvas.crc2.canvas.height);
+        }
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 
@@ -200,38 +236,104 @@ var MagicCanvas;
         }
         console.log(selectedanimation);
     }
+    function animateElementsStop() {
+        animationRunning = false;
+        animateElements(animationRunning);
+        console.log("Stop");
+    }
+    function animateElementsStart() {
+        animationRunning = true;
+        animateElements(animationRunning);
+        console.log("Start");
+    }
+    function animateElements(state = false) {
+        let canvas = document.querySelector("canvas");
+        let element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
+        if (state == false) {
+            clearTimeout(timeOut);
+        }
+        else {
+            for (MagicCanvas.index = 0; MagicCanvas.index < MagicCanvas.symbols.length; MagicCanvas.index++) {
+                if (selectedanimation == "position") {
+                    // element.move();
+                    MagicCanvas.xpos = MagicCanvas.symbols[MagicCanvas.index].position.x;
+                    MagicCanvas.ypos = MagicCanvas.symbols[MagicCanvas.index].position.y;
+                    if (MagicCanvas.xpos > canvas.width)
+                        // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
+                        MagicCanvas.symbols[MagicCanvas.index].directionx = -1;
+                    if (MagicCanvas.ypos > canvas.height)
+                        MagicCanvas.symbols[MagicCanvas.index].directiony = -1;
+                    if (MagicCanvas.xpos < 0)
+                        MagicCanvas.symbols[MagicCanvas.index].directionx = 1;
+                    if (MagicCanvas.ypos < 0)
+                        MagicCanvas.symbols[MagicCanvas.index].directiony = 1;
+                    MagicCanvas.xpos = MagicCanvas.xpos + MagicCanvas.symbols[MagicCanvas.index].directionx;
+                    MagicCanvas.ypos = MagicCanvas.ypos + MagicCanvas.symbols[MagicCanvas.index].directiony;
+                    // Kommentar einfügen
+                    MagicCanvas.symbols[MagicCanvas.index].position.x = MagicCanvas.xpos;
+                    MagicCanvas.symbols[MagicCanvas.index].position.y = MagicCanvas.ypos;
+                    // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
+                    // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
+                    MagicCanvas.symbols[MagicCanvas.index].draw();
+                }
+                if (selectedanimation == "rotate") {
+                    element.rotate();
+                }
+            }
+            // do something
+            timeOut = setTimeout(function () {
+                // Kommentar einfügen
+                // clearCanvas();
+                animateElements(animationRunning);
+            }, 25);
+        }
+    }
     function clearCanvas() {
         console.log("delete");
         let canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
-        symbols = [];
+        MagicCanvas.symbols = [];
     }
     function savePicture() {
         let name = document.getElementById("picturename").value;
         console.log("name:" + name);
     }
-    // function mouseDown(_event: MouseEvent): void {
-    //     let mousePosY: number = _event.clientY;
-    //     let mousePosX: number = _event.clientX;
-    //     let canvasRect: DOMRect = canvas.getBoundingClientRect();
-    //     let offsetX: number = mousePosX - canvasRect.left;
-    //     let offsetY: number = mousePosY - canvasRect.top;
-    //     for (let symbol of symbols) {
-    //         if (symbol.position.x - symbol.radius.x < offsetX &&
-    //             symbol.position.x + symbol.radius.x > offsetX &&
-    //             symbol.position.y - symbol.radius.y < offsetY && symbol.position.y + symbol.radius.y > offsetY) {
-    //             console.log(symbol);
-    //             dragDrop = true;
-    //             let index: number = symbols.indexOf(symbol);
-    //             symbols.splice(index, 1);
-    //             objectDragDrop = symbol;
-    //             return;
-    //         }
-    //     }
-    //  }
-    // }
-    function draganddrop(_event) {
-        console.log("it is draganddropping");
+    let drag = false;
+    let objectDragDrop;
+    let CanvasElement;
+    function dragSymbol(_event) {
+        let position = new MagicCanvas.Vector(_event.clientX - MagicCanvas.crc2.canvas.offsetLeft, _event.clientY - MagicCanvas.crc2.canvas.offsetTop);
+        if (drag == true) {
+            objectDragDrop.position.x = _event.clientX - CanvasElement.getBoundingClientRect().left;
+            objectDragDrop.position.y = _event.clientY - CanvasElement.getBoundingClientRect().top;
+        }
+    }
+    function pickSymbol(_event) {
+        console.log("Mousedown");
+        drag = true;
+        let mousePosY = _event.clientY;
+        let mousePosX = _event.clientX;
+        let canvasRect = CanvasElement.getBoundingClientRect();
+        let offsetX = mousePosX - canvasRect.left;
+        let offsetY = mousePosY - canvasRect.top;
+        for (let symbol of MagicCanvas.symbols) {
+            if (symbol.position.x - symbol.radius < offsetX &&
+                symbol.position.x + symbol.radius > offsetX &&
+                symbol.position.y - symbol.radius < offsetY &&
+                symbol.position.y + symbol.radius > offsetY) {
+                console.log(symbol);
+                let index = MagicCanvas.symbols.indexOf(symbol);
+                MagicCanvas.symbols.splice(index, 1);
+                objectDragDrop = symbol;
+            }
+        }
+    }
+    function placeSymbol(_event) {
+        console.log("MouseUp");
+        if (drag == true) {
+            drag = false;
+            MagicCanvas.symbols.push(objectDragDrop);
+        }
     }
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente

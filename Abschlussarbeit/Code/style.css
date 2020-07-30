@@ -8,6 +8,7 @@ h1 {
     text-align: center;
     color: white;
 }
+/* Overlay Elemente */
 .overlayclass {
     display: none;
 	position: fixed;
@@ -17,21 +18,17 @@ h1 {
 	left: 8%;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255,255,255,0.9);
 	z-index: 10;
 }
 .overlaytextclass {
     position: absolute;
     top: 40%;
     left: 10%;
+    width: 80%;
     font-size: large;
-}
+} 
 
-.paletteclass{
-    position: relative;
-    left: 20%;
-    bottom: 10%;
-}
 canvas {
     padding: 0;
     margin: auto;
@@ -103,8 +100,6 @@ canvas {
     border-color: black;
 }
 
-
-
 .choose {
     position: absolute;
     top: 75%;
@@ -118,13 +113,26 @@ canvas {
     background-color: rgba(255, 255, 255, 0.6);
     right: 1%;
     width: 13%;
-    top: 70%;
+    top: 50%;
     padding: 1%;
 }
+
+/* Farbe des Canvas */
+.canvascolor {
+    position: absolute;
+    border-style: solid;
+    border-color: grey;
+    background-color: rgba(255, 255, 255, 0.6);
+    top: 76%;
+    right: 1%;
+    padding: 1%;
+    width: 13%;
+}
+
 /* Animation Buttons */
 .rotateclass {
     position: absolute;
-    background-color: slategrey;
+    background-color:#3d2e21;
     color: whitesmoke;
     padding: 1%;
     top: 88%;
@@ -132,13 +140,14 @@ canvas {
     border-radius: 5px;
 }
 .rotateclass:hover{
+    background-color: #c59d48;
     border: solid;
     border-color: black;
 }
 
 .positionclass {
     position: absolute;
-    background-color: slategrey;
+    background-color: #3d2e21;
     color: whitesmoke;
     padding: 1%;
     top: 80%;
@@ -146,15 +155,17 @@ canvas {
     border-radius: 5px;
 }
 .positionclass:hover{
+    background-color: #c59d48;
     border: solid;
     border-color: black;
 }
+
 /* generate Button */
 .generateclass {
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
-    background-color: steelblue;
+    background-color:#c59d48;
     color: whitesmoke;
     border: none;
     padding: 1%;
@@ -163,6 +174,40 @@ canvas {
     border-radius: 5px;
 }
 .generateclass:hover{
+    background-color:#3d2e21;
+    border: solid;
+    border-color: black;
+}
+/* Animations Buttons */
+
+.startclass {
+    position: absolute;
+    top: 90%;
+    right: 66%;
+    padding: 0.5%;
+    border: none;
+    background-color:#c59d48;
+    border-radius: 5px;
+    color: white;
+}
+.startclass:hover {
+    background-color: #3d2e21;
+    border: solid;
+    border-color: black;
+}
+
+.stopclass {
+    position: absolute;
+    top: 90%;
+    right: 62%;
+    padding: 0.5%;
+    border: none;
+    background-color: #c59d48;
+    border-radius: 5px;
+    color: white;
+}
+.stopclass:hover {
+    background-color:#3d2e21;
     border: solid;
     border-color: black;
 }
@@ -171,15 +216,16 @@ canvas {
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
-    background-color: steelblue;
+    background-color:#3d2e21;
     color: whitesmoke;
     border: none;
     padding: 1%;
     right: 1%;
-    top: 5%;
+    top: 1%;
     border-radius: 5px;
 }
 .saveclass:hover {
+    background-color: #c59d48;
     border: solid;
     border-color: black;
 }
@@ -187,15 +233,16 @@ canvas {
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
-    background-color: steelblue;
+    background-color:#3d2e21;
     color: whitesmoke;
     border: none;
     padding: 1%;
-    right: 7%;
-    top: 5%;
+    right: 6%;
+    top: 1%;
     border-radius: 5px;
 }
 .deleteclass:hover{
+    background-color: #c59d48;
     border: solid;
     border-color: black;
 }
@@ -211,18 +258,18 @@ canvas {
     position: absolute;
     border-style: solid;
     border-color: slategrey;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color:  rgba(255, 255, 255, 0.6);
     right: 1%;
     width: 13%;
-    height: 40%;
-    top: 22%;
+    height: 30%;
+    top: 13.5%;
     padding: 1%;
 }
 .rulesclass {
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
-    background-color: steelblue;
+    background-color: #3d2e21;
     color: whitesmoke;
     border: none;
     padding: 1%;
@@ -230,12 +277,12 @@ canvas {
     border-radius: 5px;
 }
 .rulesclass:hover {
+    background-color: #c59d48;
     border: solid;
     border-color: black;
 }
 
 /* Farben */
-
 .redcolor {
     position: relative;
     top: 10%;
@@ -296,9 +343,4 @@ canvas {
     border-color: black;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0%;
-    font-size: small;
-    color: white;
-}
+

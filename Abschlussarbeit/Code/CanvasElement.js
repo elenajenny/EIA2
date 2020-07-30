@@ -6,6 +6,8 @@ var MagicCanvas;
         //     active: boolean;
         constructor(_form, _color, _animation, _position) {
             // super(_position);
+            this.directionx = 1;
+            this.directiony = 1;
             if (_position)
                 this.position = _position;
             else
@@ -63,12 +65,12 @@ var MagicCanvas;
         drawCircle() {
             let r = 4;
             MagicCanvas.crc2.save();
-            MagicCanvas.crc2.translate(40, 40);
+            MagicCanvas.crc2.translate(this.position.x, this.position.y);
             // Skalierung vertikal und horizontal
             MagicCanvas.crc2.scale(5, 5);
             // crc2.translate(-50, -50);
             MagicCanvas.crc2.beginPath();
-            MagicCanvas.crc2.arc(0, 0, r, 0, 2 * Math.PI);
+            MagicCanvas.crc2.arc(this.position.x, this.position.y, r, 0, 2 * Math.PI);
             MagicCanvas.crc2.closePath();
             MagicCanvas.crc2.restore();
             // Linienfarbe
@@ -80,9 +82,9 @@ var MagicCanvas;
         }
         drawTriangle() {
             MagicCanvas.crc2.beginPath();
-            MagicCanvas.crc2.moveTo(70, 70);
-            MagicCanvas.crc2.lineTo(10, 70);
-            MagicCanvas.crc2.lineTo(10, 25);
+            MagicCanvas.crc2.moveTo(this.position.x + 70, this.position.y + 70);
+            MagicCanvas.crc2.lineTo(this.position.x + 10, this.position.y + 70);
+            MagicCanvas.crc2.lineTo(this.position.x + 10, this.position.y + 25);
             MagicCanvas.crc2.closePath();
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
@@ -93,7 +95,7 @@ var MagicCanvas;
         }
         drawSquare() {
             MagicCanvas.crc2.beginPath();
-            MagicCanvas.crc2.rect(10, 10, 55, 40);
+            MagicCanvas.crc2.rect(this.position.x, this.position.y, 55, 40);
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();
@@ -104,15 +106,15 @@ var MagicCanvas;
         drawFlash() {
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.translate(40, 40);
-            MagicCanvas.crc2.moveTo(0, 0);
-            MagicCanvas.crc2.lineTo(20, 0);
-            MagicCanvas.crc2.lineTo(15, 25);
-            MagicCanvas.crc2.lineTo(25, 25);
-            MagicCanvas.crc2.lineTo(10, 50);
-            MagicCanvas.crc2.moveTo(0, 0);
-            MagicCanvas.crc2.lineTo(0, 30);
-            MagicCanvas.crc2.lineTo(12, 30);
-            MagicCanvas.crc2.lineTo(10, 50);
+            MagicCanvas.crc2.moveTo(this.position.x, this.position.y);
+            MagicCanvas.crc2.lineTo(this.position.x + 20, this.position.y);
+            MagicCanvas.crc2.lineTo(this.position.x + 15, this.position.y + 25);
+            MagicCanvas.crc2.lineTo(this.position.x + 25, this.position.y + 25);
+            MagicCanvas.crc2.lineTo(this.position.x + 10, this.position.y + 50);
+            MagicCanvas.crc2.moveTo(this.position.x, this.position.y);
+            MagicCanvas.crc2.lineTo(this.position.x, this.position.y + 30);
+            MagicCanvas.crc2.lineTo(this.position.x + 12, this.position.y + 30);
+            MagicCanvas.crc2.lineTo(this.position.x + 10, this.position.y + 50);
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();

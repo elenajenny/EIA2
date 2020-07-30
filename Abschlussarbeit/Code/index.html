@@ -19,9 +19,10 @@
             <div id="overlayText" class="overlaytextclass">
                 Welcome to Hogwarts!
                 <br>
-                You can build your own magic canvas with the tools on the left side.
-                Choose a canvas size, a color and a symbol and one form of animation.
+                First choose your canvas site and pick the background color on the right, and then build your canvas with the tools
+                on the left side. Pick a color and a form and optionally a form of animation. 
                 <br>
+                You can start and stop the animation by hitting the buttons underneath the canvas.
                 Now hit the generate button and your symbol will apear on the canvas.
                 You can do this as many times as you like. 
                 <br>
@@ -29,6 +30,7 @@
                 Enter a name for your finished picture and press "save" to save it.
                 <br>
                 You can find your saved pictures on the right side.
+                Feeling confused? You can always look into the rules on the top right side.
             </div>
         </div>
         <canvas width="500" height="300"></canvas>
@@ -51,6 +53,8 @@
         <span id="position" class="positionclass">position</span>
         <span id="rotate" class="rotateclass">rotate</span>
         <button id="generate" class="generateclass">generate</button>
+        <button id="startanimation" class="startclass">start</button>
+        <button id="stopanimation" class="stopclass">stop</button>
 
         <!--Rechte Seite-->
         <button id="delete" class="deleteclass">delete</button>
@@ -77,11 +81,18 @@
                 <input type="radio" name="canvassize" value="large" id="large">
                 <label for="large">large</label>
         </div>
+        <div class="canvascolor">
+            <h3>Background color</h3>
+                <input type="radio" name="canvascolor" value="white" id="white" checked>
+                <label for="white">white</label>
+                <br>
+                <input type="radio" name="canvascolor" value="black" id="black">
+                <label for="black">black</label>
+                <br>
+                <input type="radio" name="canvascolor" value="beige" id="beige">
+                <label for="beige">beige</label>
+        </div>
     </div>
 </body>
-
-<footer>
-  <p class="footer">In Zusammenarbeit mit Celine Schiebel</p>
-</footer>
 
 </html>
