@@ -2,18 +2,14 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
+    let canvas = document.querySelector("canvas");
     // ausgwählte Farbe zum Füllen
     let selectedcolor = "#ff0000";
     let selectedform = "circle";
     let selectedanimation = "position";
     let symbols = [];
-    let chosenName;
-    let canvas = document.querySelector("canvas");
-    // Ausprobieren
-    // let canvasheight: number;
-    // let canvaswidth: number;
     function handleLoad(_event) {
-        // let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+        let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
@@ -42,8 +38,8 @@ var MagicCanvas;
         let large = document.querySelector("#large");
         large.addEventListener("click", handleCanvasSize);
         // Delete Button, um den Canvas zu säubern
-        // let deleteBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#delete");
-        // deleteBtn.addEventListener("click", clearCanvas);
+        let deleteBtn = document.querySelector("#delete");
+        deleteBtn.addEventListener("click", clearCanvas);
         let save = document.querySelector("#save");
         save.addEventListener("click", savePicture);
         // Klick auf die verschiedenen Form Icons
@@ -60,9 +56,6 @@ var MagicCanvas;
         position.addEventListener("click", setAnimation);
         let rotate = document.querySelector("#rotate");
         rotate.addEventListener("click", setAnimation);
-        // canvas.addEventListener("mousedown", mouseDown);
-        // canvas.addEventListener("mousemove", mouseMove);
-        // canvas.addEventListener("mouseup", mouseUp);
         canvas.addEventListener("click", draganddrop);
     }
     function rulesVisibility() {
@@ -106,75 +99,116 @@ var MagicCanvas;
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
         let element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
+        if (selectedanimation == "rotate") {
+            MagicCanvas.crc2.restore();
+            element.rotate();
+        }
         element.draw();
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 
         let actualid = event.target.getAttribute("id");
+        console.log("Event:" + event.target);
+        // Farben divs
+        let red = document.querySelector("#red");
+        let blue = document.querySelector("#blue");
+        let green = document.querySelector("#green");
+        let yellow = document.querySelector("#yellow");
         // wenn die id des childs zb red ist dann wird die farbe mit selectedcolor überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
+            red.style.border = "1px solid #ff0000";
+            blue.style.border = "none";
+            green.style.border = "none";
+            yellow.style.border = "none";
         }
         else if (actualid == "blue") {
             selectedcolor = "#000890";
+            blue.style.border = "1px solid #ff0000";
+            red.style.border = "none";
+            green.style.border = "none";
+            yellow.style.border = "none";
+            // colorblue.style.border = "solid #FF0000";
         }
         else if (actualid == "green") {
             selectedcolor = "#0D6217";
+            green.style.border = "1px solid #ff0000";
+            blue.style.border = "none";
+            red.style.border = "none";
+            yellow.style.border = "none";
         }
         else if (actualid == "yellow") {
             selectedcolor = "#EEE117";
+            yellow.style.border = "1px solid #ff0000";
+            blue.style.border = "none";
+            green.style.border = "none";
+            red.style.border = "none";
         }
         console.log("Event:" + event.target.getAttribute("id"));
         console.log(selectedcolor);
     }
     function setForm(event) {
-        // console.log("hallo");
         let formid = event.currentTarget.getAttribute("id");
+        // Formen divs
+        let circle = document.querySelector("#circleicon");
+        let triangle = document.querySelector("#triangleicon");
+        let square = document.querySelector("#squareicon");
+        let flash = document.querySelector("#flashicon");
         if (formid == "circleicon") {
             selectedform = "circle";
-            console.log("rufe drawcircle auf");
+            circle.style.border = "1px solid #ff0000";
+            triangle.style.border = "none";
+            square.style.border = "none";
+            flash.style.border = "none";
         }
         else if (formid == "triangleicon") {
             selectedform = "triangle";
-            console.log("rufe drawtriangle auf");
+            triangle.style.border = "1px solid #ff0000";
+            circle.style.border = "none";
+            square.style.border = "none";
+            flash.style.border = "none";
         }
         else if (formid == "squareicon") {
             selectedform = "square";
-            console.log("rufe drawsquare auf");
+            square.style.border = "1px solid #ff0000";
+            flash.style.border = "none";
+            circle.style.border = "none";
+            triangle.style.border = "none";
         }
         else if (formid == "flashicon") {
             selectedform = "flash";
-            console.log("rufe drawflash auf");
+            flash.style.border = "1px solid #ff0000";
+            square.style.border = "none";
+            circle.style.border = "none";
+            triangle.style.border = "none";
         }
         console.log(selectedform);
     }
     function setAnimation(event) {
         let animationid = event.currentTarget.getAttribute("id");
+        let positiondiv = document.querySelector("#position");
+        let rotatediv = document.querySelector("#rotate");
         if (animationid == "position") {
             selectedanimation = "position";
+            // positiondiv.style.border = "1px solid #ff0000";
+            // rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
+            // rotatediv.style.border = "1px solid #ff0000";
+            // positiondiv.style.border = "none";
         }
         console.log(selectedanimation);
     }
-    function clearCanvas(_symbol) {
+    function clearCanvas() {
         console.log("delete");
-        // Array leeren
-        // let index: number = canvasElement[length];
-        // symbols.splice(index, 1);
-        // symbols = [];
-        // symbols.splice(0, symbols.length);
-        let index = symbols.indexOf(_symbol);
-        symbols.splice(index, 1);
-        console.log(symbols.length);
+        let canvas = document.querySelector("canvas");
+        MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
+        symbols = [];
     }
-    function savePicture(event) {
-        // let name: any;
-        // (document.querySelector("#picturename") as HTMLInputElement).value = name;
-        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
-        // let namepicture: string = event.currentTarget.value;
-        console.log("name:" + chosenName);
+    function savePicture() {
+        let name = document.getElementById("picturename").value;
+        console.log("name:" + name);
     }
     // function mouseDown(_event: MouseEvent): void {
     //     let mousePosY: number = _event.clientY;

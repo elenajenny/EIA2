@@ -7,6 +7,7 @@ namespace MagicCanvas {
         public selectedform: string;
         // public rotateangle: number;
         public selectedanimation: string;
+        active: boolean;
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
     //     active: boolean;
 
@@ -58,7 +59,11 @@ namespace MagicCanvas {
         }
 
         public rotate(): void {
-            // noch bearbeiten
+            //Matrix transformation
+            crc2.save();
+            crc2.translate(70, -10);
+            //um 45 Grad rotieren
+            crc2.rotate(Math.PI / 4);
         }
 
         public draw(): void {
