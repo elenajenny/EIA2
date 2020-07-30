@@ -1,4 +1,4 @@
-namespace MagicCanvas { 
+namespace MagicCanvas {
 
     window.addEventListener("load", handleLoad);
 
@@ -11,13 +11,13 @@ namespace MagicCanvas {
 
     let symbols: canvasElement[] = [];
     let chosenName: string;
-
+    let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
     // Ausprobieren
     // let canvasheight: number;
     // let canvaswidth: number;
 
     function handleLoad(_event: Event): void {
-        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+        // let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
@@ -40,7 +40,7 @@ namespace MagicCanvas {
         // Generate
         let generate: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#generate");
         generate.addEventListener("click", generateSymbols);
-        
+
         // Klick auf Canvas Größe
         let standard: HTMLInputElement = <HTMLInputElement>document.querySelector("#standard");
         standard.addEventListener("click", handleCanvasSize);
@@ -52,13 +52,11 @@ namespace MagicCanvas {
         large.addEventListener("click", handleCanvasSize);
 
         // Delete Button, um den Canvas zu säubern
-        let deleteBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#delete");
-        deleteBtn.addEventListener("click", clearCanvas);
+        // let deleteBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#delete");
+        // deleteBtn.addEventListener("click", clearCanvas);
 
         let save: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#save");
         save.addEventListener("click", savePicture);
-        let picture: HTMLInputElement = <HTMLInputElement>document.querySelector("#picturename");
-        picture.addEventListener("oninput", enterName);
 
         // Klick auf die verschiedenen Form Icons
         let circle: HTMLDivElement = <HTMLDivElement>document.querySelector("#circleicon");
@@ -76,12 +74,19 @@ namespace MagicCanvas {
         let rotate: HTMLDivElement = <HTMLDivElement>document.querySelector("#rotate");
         rotate.addEventListener("click", setAnimation);
 
+        // canvas.addEventListener("mousedown", mouseDown);
+        // canvas.addEventListener("mousemove", mouseMove);
+        // canvas.addEventListener("mouseup", mouseUp);
+
+        canvas.addEventListener("click", draganddrop);
+        
+
     }
-    
+
     function rulesVisibility(): void {
         console.log("show rules");
         let rulesdiv: HTMLElement = <HTMLElement>document.querySelector("#overlay");
-        
+
         if (rulesdiv.style.display == "none") {
             rulesdiv.style.display = "block";
         } else {
@@ -105,7 +110,7 @@ namespace MagicCanvas {
         if (smallsize.checked == true) {
             console.log("small");
             canvas.setAttribute("style", "width: 450px");
-            canvas.setAttribute("style", "height: 250px"); 
+            canvas.setAttribute("style", "height: 250px");
         }
         if (mediumsize.checked == true) {
             canvas.setAttribute("style", "width: 550px");
@@ -116,14 +121,15 @@ namespace MagicCanvas {
             canvas.setAttribute("style", "height: 400px");
         }
     }
-    
-    function generateSymbols (_event: Event): void {
+
+
+    function generateSymbols(_event: Event): void {
         console.log("generate Symbols");
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
 
         let element: canvasElement = new canvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
-        element.draw();   
+        element.draw();
     }
 
     function setColor(event: any): void {
@@ -139,7 +145,7 @@ namespace MagicCanvas {
         } else if (actualid == "yellow") {
             selectedcolor = "#EEE117";
         }
-       
+
         console.log("Event:" + event.target.getAttribute("id"));
         console.log(selectedcolor);
     }
@@ -147,7 +153,7 @@ namespace MagicCanvas {
     function setForm(event: any): void {
         // console.log("hallo");
         let formid: string = event.currentTarget.getAttribute("id");
-       
+
         if (formid == "circleicon") {
             selectedform = "circle";
             console.log("rufe drawcircle auf");
@@ -161,7 +167,7 @@ namespace MagicCanvas {
             selectedform = "flash";
             console.log("rufe drawflash auf");
         }
-       
+
         console.log(selectedform);
     }
 
@@ -177,33 +183,24 @@ namespace MagicCanvas {
         console.log(selectedanimation);
     }
 
-    function clearCanvas(): void  {
+    function clearCanvas(_symbol: canvasElement): void {
         console.log("delete");
         // Array leeren
-        let index: number = canvasElement[length];
+        // let index: number = canvasElement[length];
+        // symbols.splice(index, 1);
+
+        // symbols = [];
+
+        // symbols.splice(0, symbols.length);
+
+        let index: number = symbols.indexOf(_symbol);
         symbols.splice(index, 1);
 
-        // // Store the current transformation matrix
-        // crc2.save();
-
-        // // Use the identity matrix while clearing the canvas
-        // crc2.setTransform(1, 0, 0, 1, 0, 0);
-        // crc2.clearRect(0, 0, canvaswidth, canvasheight);
-
-        // // Restore the transform
-        // crc2.restore();
-        
+        console.log(symbols.length);
     }
 
-    function enterName(): void {
-        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
-        // chosenName = name;
-        // console.log("name:" + chosenName);
-        let name = (<HTMLInputElement>document.getElementById("#picturename")).value;
-        document.getElementById("pictures").innerHTML = "You wrote: " + name;
-    }
-    
-    function savePicture(event): void {
+
+    function savePicture(event: any): void {
         // let name: any;
         // (document.querySelector("#picturename") as HTMLInputElement).value = name;
         // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
@@ -211,43 +208,33 @@ namespace MagicCanvas {
         console.log("name:" + chosenName);
     }
 
-    
+    // function mouseDown(_event: MouseEvent): void {
+    //     let mousePosY: number = _event.clientY;
+    //     let mousePosX: number = _event.clientX;
+    //     let canvasRect: DOMRect = canvas.getBoundingClientRect();
+
+    //     let offsetX: number = mousePosX - canvasRect.left;
+    //     let offsetY: number = mousePosY - canvasRect.top;
+        
+    //     for (let symbol of symbols) {
+
+    //         if (symbol.position.x - symbol.radius.x < offsetX &&
+    //             symbol.position.x + symbol.radius.x > offsetX &&
+    //             symbol.position.y - symbol.radius.y < offsetY && symbol.position.y + symbol.radius.y > offsetY) {
+    //             console.log(symbol);
+    //             dragDrop = true;
+    //             let index: number = symbols.indexOf(symbol);
+    //             symbols.splice(index, 1);
+    //             objectDragDrop = symbol;
+    //             return;
+    //         }
+    //     }
+    //  }
+    // }
 
     function draganddrop(_event: MouseEvent): void {
+        
         console.log("it is draganddropping");
-        // Funktion nacher so aufrufen
-        // symbols.onmousedown = function(event): void {
-        //     // (1) prepare to moving: make absolute and on top by z-index
-        //     symbols.style.position = "absolute";
-        //     symbols.style.zIndex = 1000;
-          
-        //     // move it out of any current parents directly into body
-        //     // to make it positioned relative to the body
-        //     document.body.append(symbols);
-          
-        //     // centers the symbols at (pageX, pageY) coordinates
-        //     function moveAt(pageX, pageY): void {
-        //       symbols.style.left = pageX - symbols.offsetWidth / 2 + "px";
-        //       symbols.style.top = pageY - symbols.offsetHeight / 2 + "px";
-        //     }
-          
-        //     // move our absolutely positioned symbols under the pointer
-        //     moveAt(event.pageX, event.pageY);
-          
-        //     function onMouseMove(event): void {
-        //       moveAt(event.pageX, event.pageY);
-        //     }
-          
-        //     // (2) move the symbols on mousemove
-        //     document.addEventListener("mousemove", onMouseMove);
-          
-        //     // (3) drop the symbols, remove unneeded handlers
-        //     symbols.onmouseup = function() {
-        //       document.removeEventListener("mousemove", onMouseMove);
-        //       symbols.onmouseup = null;
-        //     };
-          
-        //   };
     }
 }
 
