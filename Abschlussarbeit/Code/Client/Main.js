@@ -16,8 +16,7 @@ var MagicCanvas;
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
-        let response = await fetch("Data.json");
-        let offer = await response.text();
+        // let offer: string = await response.text();
         //Klick auf Hintergrundfarbe
         let white = document.querySelector("#white");
         white.addEventListener("click", setBackground);

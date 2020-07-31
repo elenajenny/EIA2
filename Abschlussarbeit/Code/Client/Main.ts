@@ -26,8 +26,8 @@ namespace MagicCanvas {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-        let response: Response = await fetch("Data.json");
-        let offer: string = await response.text();
+        
+        // let offer: string = await response.text();
         
         //Klick auf Hintergrundfarbe
         let white: HTMLInputElement = <HTMLInputElement>document.querySelector("#white");
