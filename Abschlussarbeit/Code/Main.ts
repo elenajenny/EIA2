@@ -286,7 +286,6 @@ namespace MagicCanvas {
     }
 
     function animateElements(state: boolean = false): void {
-        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
         let element: canvasElement = new canvasElement(selectedform, selectedcolor, selectedanimation);
 
         if (state == false) {
@@ -294,35 +293,8 @@ namespace MagicCanvas {
         } else {
             for (index = 0; index < symbols.length; index++) {
                 if (selectedanimation == "position") {
-                    // element.move();
-                    xpos = symbols[index].position.x;
-                    ypos = symbols[index].position.y;
-
-                    if (xpos > canvas.width)
-                        // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
-                        symbols[index].directionx = -1;
-
-                    if (ypos > canvas.height)
-                        symbols[index].directiony = -1;
-
-                    if (xpos < 0)
-                        symbols[index].directionx = 1;
-
-                    if (ypos < 0)
-                        symbols[index].directiony = 1;
-
-                    xpos = xpos + symbols[index].directionx;
-                    ypos = ypos + symbols[index].directiony;
-
-                    // Kommentar einfügen
-                    symbols[index].position.x = xpos;
-                    symbols[index].position.y = ypos;
-
-                    // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
-                    // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
-
-
-                    symbols[index].draw();
+                    element.move();
+                    
                 }
                 if (selectedanimation == "rotate") {
                     element.rotate();

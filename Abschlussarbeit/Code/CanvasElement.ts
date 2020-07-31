@@ -36,29 +36,39 @@ namespace MagicCanvas {
 
         public animate(): void {
             if (this.selectedanimation == "position")
-                this.move(20);
+                this.move();
             else if (this.selectedanimation == "rotate")
                 this.rotate();
         }
 
-        public move(_timeslice: number): void {
-            // console.log("Moveable move");
-            let offset: Vector = this.velocity.copy();
-            offset.scale(_timeslice);
-            this.position.add(offset);
+        public move(): void {
+            let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+            xpos = symbols[index].position.x;
+            ypos = symbols[index].position.y;
 
-            if (this.position.x < 0) {
-                this.position.x += crc2.canvas.width;
-            }
-            if (this.position.y < 0) {
-                this.position.y += crc2.canvas.height;
-            }
-            if (this.position.x > crc2.canvas.width) {
-                this.position.x -= crc2.canvas.width;
-            }
-            if (this.position.y > crc2.canvas.height) {
-                this.position.y -= crc2.canvas.height;
-            }
+            if (xpos > canvas.width)
+                // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
+                symbols[index].directionx = -1;
+
+            if (ypos > canvas.height)
+                symbols[index].directiony = -1;
+
+            if (xpos < 0)
+                symbols[index].directionx = 1;
+
+            if (ypos < 0)
+                symbols[index].directiony = 1;
+
+            xpos = xpos + symbols[index].directionx;
+            ypos = ypos + symbols[index].directiony;
+
+            symbols[index].position.x = xpos;
+            symbols[index].position.y = ypos;
+
+            // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
+            // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
+
+            symbols[index].draw();
         }
 
         public rotate(): void {
