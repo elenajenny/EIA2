@@ -48,12 +48,12 @@ var MagicCanvas;
             // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
             MagicCanvas.symbols[MagicCanvas.index].draw();
         }
-        rotate() {
+        rotate(frame) {
             //Matrix transformation
             MagicCanvas.crc2.save();
             MagicCanvas.crc2.translate(70, -10);
             //um 45 Grad rotieren
-            MagicCanvas.crc2.rotate(Math.PI / 4);
+            // crc2.rotate(Math.PI / 4)
         }
         draw() {
             if (this.selectedform == "circle")

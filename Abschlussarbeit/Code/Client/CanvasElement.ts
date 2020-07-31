@@ -71,12 +71,13 @@ namespace MagicCanvas {
             symbols[index].draw();
         }
 
-        public rotate(): void {
+        public rotate(frame: any): void {
+
             //Matrix transformation
             crc2.save();
             crc2.translate(70, -10);
             //um 45 Grad rotieren
-            crc2.rotate(Math.PI / 4);
+            // crc2.rotate(Math.PI / 4)
         }
 
         public draw(): void {
