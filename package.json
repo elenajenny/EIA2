@@ -1,0 +1,23 @@
+{
+  "name": "magiccanvas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "^3.5.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node Abschlussarbeit/Code/Server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elenajenny/EIA2.git"
+  },
+  "author": "elena mayer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elenajenny/EIA2/issues"
+  },
+  "homepage": "https://github.com/elenajenny/EIA2#readme"
+}
