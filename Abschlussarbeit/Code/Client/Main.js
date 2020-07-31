@@ -83,7 +83,7 @@ var MagicCanvas;
         // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         let data = JSON.stringify(MagicCanvas.symbols);
         let query = new URLSearchParams(data);
-        let response = await fetch("index.html?" + query.toString());
+        let response = await fetch("index.html?" + name + query.toString());
         alert("Picture saved!");
     }
     function rulesVisibility() {

@@ -109,7 +109,7 @@ namespace MagicCanvas {
         let data: string = JSON.stringify(symbols);
         
         let query: URLSearchParams = new URLSearchParams(<any>data);
-        let response: Response = await fetch("index.html?" + query.toString());
+        let response: Response = await fetch("index.html?" + name + query.toString());
         alert("Picture saved!");
     }
 
