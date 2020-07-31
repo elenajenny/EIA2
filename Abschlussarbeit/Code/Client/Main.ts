@@ -2,7 +2,7 @@ namespace MagicCanvas {
 
     window.addEventListener("load", handleLoad);
 
-    // let appurl: string = "";
+    let appurl: string = "https://magiccanvas.herokuapp.com/";
 
     export let crc2: CanvasRenderingContext2D;
     let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
@@ -100,6 +100,19 @@ namespace MagicCanvas {
         canvas.addEventListener("mousemove", dragSymbol);
     }
 
+    async function savePicture(_event: Event): Promise<void> {
+        // eingetragener Name des Nutzers
+        let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
+        console.log("name:" + name);
+
+        // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
+        let data: string = JSON.stringify(symbols);
+        
+        let query: URLSearchParams = new URLSearchParams(<any>data);
+        let response: Response = await fetch("index.html?" + query.toString());
+        alert("Picture saved!");
+    }
+
     function rulesVisibility(): void {
         console.log("show rules");
         let rulesdiv: HTMLElement = <HTMLElement>document.querySelector("#overlay");
@@ -149,7 +162,7 @@ namespace MagicCanvas {
 
         if (selectedanimation == "rotate") {
             crc2.restore();
-            element.rotate();
+            // element.rotate();
         }
         element.draw();
     }
@@ -266,13 +279,9 @@ namespace MagicCanvas {
 
         if (animationid == "position") {
             selectedanimation = "position";
-            // positiondiv.style.border = "1px solid #ff0000";
-            // rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
-            // rotatediv.style.border = "1px solid #ff0000";
-            // positiondiv.style.border = "none";
         }
 
         console.log(selectedanimation);
@@ -322,10 +331,6 @@ namespace MagicCanvas {
         symbols = [];
     }
 
-    function savePicture(): void {
-        let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
-        console.log("name:" + name);
-    }
 
     let drag: boolean = false;
     let objectDragDrop: canvasElement;

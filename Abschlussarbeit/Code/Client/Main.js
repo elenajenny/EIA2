@@ -2,6 +2,7 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
+    let appurl = "https://magiccanvas.herokuapp.com/";
     let canvas = document.querySelector("canvas");
     // ausgwählte Farbe zum Füllen
     let selectedcolor = "#ff0000";
@@ -76,6 +77,16 @@ var MagicCanvas;
         canvas.addEventListener("mouseup", placeSymbol);
         canvas.addEventListener("mousemove", dragSymbol);
     }
+    async function savePicture(_event) {
+        // eingetragener Name des Nutzers
+        let name = document.getElementById("picturename").value;
+        console.log("name:" + name);
+        // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
+        let data = JSON.stringify(MagicCanvas.symbols);
+        let query = new URLSearchParams(data);
+        let response = await fetch("index.html?" + query.toString());
+        alert("Picture saved!");
+    }
     function rulesVisibility() {
         console.log("show rules");
         let rulesdiv = document.querySelector("#overlay");
@@ -119,7 +130,7 @@ var MagicCanvas;
         MagicCanvas.symbols.push(element);
         if (selectedanimation == "rotate") {
             MagicCanvas.crc2.restore();
-            element.rotate();
+            // element.rotate();
         }
         element.draw();
     }
@@ -228,13 +239,9 @@ var MagicCanvas;
         let rotatediv = document.querySelector("#rotate");
         if (animationid == "position") {
             selectedanimation = "position";
-            // positiondiv.style.border = "1px solid #ff0000";
-            // rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
-            // rotatediv.style.border = "1px solid #ff0000";
-            // positiondiv.style.border = "none";
         }
         console.log(selectedanimation);
     }
@@ -275,10 +282,6 @@ var MagicCanvas;
         let canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
         MagicCanvas.symbols = [];
-    }
-    function savePicture() {
-        let name = document.getElementById("picturename").value;
-        console.log("name:" + name);
     }
     let drag = false;
     let objectDragDrop;
