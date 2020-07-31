@@ -10,11 +10,13 @@ var MagicCanvas;
     MagicCanvas.symbols = [];
     let timeOut;
     let animationRunning = false;
-    function handleLoad(_event) {
+    async function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         MagicCanvas.crc2 = canvas.getContext("2d");
+        let response = await fetch("Data.json");
+        let offer = await response.text();
         //Klick auf Hintergrundfarbe
         let white = document.querySelector("#white");
         white.addEventListener("click", setBackground);

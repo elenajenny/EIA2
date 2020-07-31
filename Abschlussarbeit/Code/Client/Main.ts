@@ -2,6 +2,8 @@ namespace MagicCanvas {
 
     window.addEventListener("load", handleLoad);
 
+    // let appurl: string = "";
+
     export let crc2: CanvasRenderingContext2D;
     let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
@@ -18,12 +20,15 @@ namespace MagicCanvas {
     export let ypos: number;
     export let index: number;
 
-    function handleLoad(_event: Event): void {
+    async function handleLoad(_event: Event): Promise<void> {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+        let response: Response = await fetch("Data.json");
+        let offer: string = await response.text();
+        
         //Klick auf Hintergrundfarbe
         let white: HTMLInputElement = <HTMLInputElement>document.querySelector("#white");
         white.addEventListener("click", setBackground);
