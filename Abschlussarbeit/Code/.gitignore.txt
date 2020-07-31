@@ -1,0 +1,2 @@
+#Dateien ignorieren
+/node_modules
