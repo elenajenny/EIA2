@@ -36,7 +36,7 @@ export namespace MagicCanvas {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        CanvasCollection = mongoClient.db("HomeHelper").collection("Orders");
+        CanvasCollection = mongoClient.db("MagicCanvas").collection("CanvasCollection");
         console.log("Database connection" + CanvasCollection != undefined);
     }
 
@@ -56,9 +56,6 @@ export namespace MagicCanvas {
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
         }
-
-
-        
 
         _response.write("This is my response");
         _response.end();

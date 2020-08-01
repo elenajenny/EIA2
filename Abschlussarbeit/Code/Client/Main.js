@@ -2,8 +2,8 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
-    let appurl = "https://magiccanvas.herokuapp.com/";
     let canvas = document.querySelector("canvas");
+    let appurl = "https://magiccanvas.herokuapp.com/";
     // ausgwählte Farbe zum Füllen
     let selectedcolor = "#ff0000";
     let selectedform = "circle";

@@ -25,7 +25,7 @@ var MagicCanvas;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        CanvasCollection = mongoClient.db("HomeHelper").collection("Orders");
+        CanvasCollection = mongoClient.db("MagicCanvas").collection("CanvasCollection");
         console.log("Database connection" + CanvasCollection != undefined);
     }
     function handleRequest(_request, _response) {
