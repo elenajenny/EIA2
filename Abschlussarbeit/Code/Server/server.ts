@@ -1,6 +1,7 @@
 import * as Http from "http" ;
 // import { Url, UrlWithParsedQuery } from "url";
 import * as Url from "url";
+import * as Mongo from "mongodb";
 
 export namespace MagicCanvas {
     let server: Http.Server = Http.createServer();
@@ -11,9 +12,33 @@ export namespace MagicCanvas {
         port = 5001;
 
     console.log("Server starting on port:" + port);
-
-    server.listen(port);
     server.addListener("request", handleRequest);
+
+    let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
+
+
+    startServer(port);
+    connectToDatabase(databaseurl);
+
+    function startServer(_port: number | string): void {
+    
+        let server: Http.Server = Http.createServer();
+        console.log("Server starting on port:" + _port);
+
+        server.listen(_port);
+        server.addListener("request", handleRequest);
+    }
+    
+    let pictures: Mongo.Collection;
+
+    async function connectToDatabase(_url: string): Promise<void> {
+        let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        pictures = mongoClient.db("HomeHelper").collection("Orders");
+        console.log("Database connection" + pictures != undefined);
+    }
+
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("Whats up?");

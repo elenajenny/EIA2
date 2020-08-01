@@ -10,7 +10,7 @@ var L07_Homehelper;
     if (port == undefined)
         port = 5001;
     // let databaseurl: string = "mongodb://localhost:27017";
-    let databaseurl = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/test?retryWrites=true&w=majority";
+    // let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/test?retryWrites=true&w=majority";
     startServer(port);
     connectToDatabase(databaseurl);
     function startServer(_port) {
