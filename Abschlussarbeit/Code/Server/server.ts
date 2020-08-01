@@ -1,5 +1,4 @@
-import * as Http from "http" ;
-// import { Url, UrlWithParsedQuery } from "url";
+import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
 
@@ -7,15 +6,16 @@ export namespace MagicCanvas {
     let server: Http.Server = Http.createServer();
     console.log(server);
 
+    let CanvasCollection: Mongo.Collection;
+
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
 
     console.log("Server starting on port:" + port);
-    server.addListener("request", handleRequest);
 
     let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
-    let CanvasCollection: Mongo.Collection;
+    
 
 
     startServer(port);

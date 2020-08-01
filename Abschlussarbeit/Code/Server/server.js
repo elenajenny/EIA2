@@ -1,20 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
-// import { Url, UrlWithParsedQuery } from "url";
 const Url = require("url");
 const Mongo = require("mongodb");
 var MagicCanvas;
 (function (MagicCanvas) {
     let server = Http.createServer();
     console.log(server);
+    let CanvasCollection;
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
     console.log("Server starting on port:" + port);
-    server.addListener("request", handleRequest);
     let databaseurl = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
-    let CanvasCollection;
     startServer(port);
     connectToDatabase(databaseurl);
     function startServer(_port) {
