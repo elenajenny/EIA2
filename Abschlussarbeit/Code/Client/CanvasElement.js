@@ -97,7 +97,7 @@ var MagicCanvas;
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
             if (this.selectedanimation == "rotate") {
-                // Matrix transformation
+                // Matrix transformation 
                 MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
                 MagicCanvas.crc2.rotate(-this.angle * Math.PI / 180);
                 MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));

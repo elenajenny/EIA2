@@ -80,9 +80,9 @@ var MagicCanvas;
         rotate.addEventListener("click", setAnimation);
         // Element verschieben
         // mousedown, mousemove, and mouseup
-        canvas.addEventListener("mousedown", function (e) { startMove(canvas, e); });
-        canvas.addEventListener("mousemove", function (e) { nowMove(canvas, e); });
-        canvas.addEventListener("mouseup", function (e) { stopMove(canvas, e); });
+        canvas.addEventListener("mousedown", function (event) { startMove(canvas, event); });
+        canvas.addEventListener("mousemove", function (event) { nowMove(canvas, event); });
+        canvas.addEventListener("mouseup", function (event) { stopMove(canvas, event); });
     }
     async function savePicture(_event) {
         // eingetragener Name des Nutzers
@@ -91,7 +91,9 @@ var MagicCanvas;
         // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         let data = JSON.stringify(MagicCanvas.symbols);
         let query = new URLSearchParams(data);
-        let response = await fetch("index.html?" + name + query.toString());
+        let response = await fetch(appurl + "?" + query.toString());
+        let responseText = await response.text();
+        console.log(responseText);
         alert("Picture saved!");
     }
     function rulesVisibility() {
