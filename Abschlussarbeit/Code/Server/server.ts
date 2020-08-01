@@ -16,7 +16,7 @@ export namespace MagicCanvas {
 
     let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
     
-
+ 
 
     startServer(port);
     connectToDatabase(databaseurl);
@@ -30,8 +30,6 @@ export namespace MagicCanvas {
         server.addListener("request", handleRequest);
     }
     
-    
-
     async function connectToDatabase(_url: string): Promise<void> {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);

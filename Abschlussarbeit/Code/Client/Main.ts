@@ -2,10 +2,8 @@ namespace MagicCanvas {
 
     window.addEventListener("load", handleLoad);
 
-    
-
     export let crc2: CanvasRenderingContext2D;
-    let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+    export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
     let appurl: string = "https://magiccanvas.herokuapp.com/";
 

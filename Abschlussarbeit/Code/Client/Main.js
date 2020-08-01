@@ -2,7 +2,7 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
-    let canvas = document.querySelector("canvas");
+    MagicCanvas.canvas = document.querySelector("canvas");
     let appurl = "https://magiccanvas.herokuapp.com/";
     // ausgwählte Farbe zum Füllen
     let selectedcolor = "#ff0000";
