@@ -2,14 +2,14 @@
   "name": "magiccanvas",
   "version": "1.0.0",
   "description": "",
-  "main": "Main.js",
+  "main": "index.js",
   "dependencies": {
     "@types/mongodb": "^3.5.25",
     "mongodb": "^3.6.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node Abschlussarbeit/Code/Server/server.js remote"
+    "start": "node Abschlussarbeit/Code/Server/server.js"
   },
   "repository": {
     "type": "git",
