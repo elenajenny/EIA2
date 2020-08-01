@@ -310,7 +310,7 @@ namespace MagicCanvas {
 
     function animateElements(state: boolean = false): void {
         let element: canvasElement = new canvasElement(selectedform, selectedcolor, selectedanimation);
-        let canvas: HTMLCanvasElement= <HTMLCanvasElement>document.querySelector("canvas");
+        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
         if (state == false) {
             clearTimeout(timeOut);
@@ -324,7 +324,7 @@ namespace MagicCanvas {
                 // Kommentar einfügen
                 clearForAnimation();
                 animateElements(animationRunning);
-            }, 25);
+            },  25);
         }
     }
 

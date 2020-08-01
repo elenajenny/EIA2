@@ -15,6 +15,7 @@ export namespace MagicCanvas {
     server.addListener("request", handleRequest);
 
     let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
+    let CanvasCollection: Mongo.Collection;
 
 
     startServer(port);
@@ -29,14 +30,14 @@ export namespace MagicCanvas {
         server.addListener("request", handleRequest);
     }
     
-    let pictures: Mongo.Collection;
+    
 
     async function connectToDatabase(_url: string): Promise<void> {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        pictures = mongoClient.db("HomeHelper").collection("Orders");
-        console.log("Database connection" + pictures != undefined);
+        CanvasCollection = mongoClient.db("HomeHelper").collection("Orders");
+        console.log("Database connection" + CanvasCollection != undefined);
     }
 
 
