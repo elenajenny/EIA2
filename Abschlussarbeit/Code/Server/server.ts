@@ -50,7 +50,7 @@ export namespace MagicCanvas {
         let name: string;
 
         _response.setHeader("content-type", "text/html; charset-utf-8");
-        _response.setHeader("Access-Control-Allow-Origin", "*");
+        _response.setHeader("No-Access-Control-Allow-Origin", "*");
 
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);
