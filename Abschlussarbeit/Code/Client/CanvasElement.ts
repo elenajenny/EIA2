@@ -15,7 +15,6 @@ namespace MagicCanvas {
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
 
         constructor(_form: string, _color: string, _animation: string, _position?: Vector) {
-            // super(_position);
 
             if (_position)
                 this.position = _position;
@@ -32,11 +31,13 @@ namespace MagicCanvas {
 
         public animate(canvasWidth: number, canvasHeight: number): void {
             if (this.selectedanimation == "position") {
-                // element.move();
+               
                 xpos = this.position.x;
                 ypos = this.position.y;
 
                 // rechts
+                //wenn x posizion und die sie größer als die canvas breite ist, dann würde es sich aus dem canvas rausbewegen
+                //deshlab richtung -1
                 if (xpos + this.size > canvasWidth)
                     // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
                     this.directionx = -1;
@@ -54,22 +55,22 @@ namespace MagicCanvas {
                     this.directiony = 1;
 
                 xpos = xpos + this.directionx;
-                ypos = ypos + this.directiony;
+                ypos = ypos + this.directiony; //Bewegungsrichtung wird der xpos und ypos hinzugefügt, damit der die Bewegungrichtung kennt
 
-                // Kommentar einfügen
+                //Positionsinformation wird x und ypos hinzugefügt
                 this.position.x = xpos;
                 this.position.y = ypos;
 
-                //console.log("this.position.y: " + this.position.y);
-                //console.log("this.directiony " + this.directiony);
             }
             else if (this.selectedanimation == "rotate") {
                 if (this.angle < 360)
+                //Winkel wird immer um 1 vergrößert 
+                //eigentlich wird Canvas gedreht
                    this.angle = this.angle + 1;
                 else
                     this.angle = 0;                
             }
-
+            //immer neu zeichnen, damit sie immer neue Position haben
             this.draw();            
 
         }
