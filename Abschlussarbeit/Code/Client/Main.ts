@@ -288,14 +288,19 @@ namespace MagicCanvas {
 
     function setAnimation(event: any): void {
         let animationid: string = event.currentTarget.getAttribute("id");
-        let positiondiv: HTMLDivElement = <HTMLDivElement>document.querySelector("#position");
-        let rotatediv: HTMLDivElement = <HTMLDivElement>document.querySelector("#rotate");
+        let position: HTMLDivElement = <HTMLDivElement>document.querySelector("#position");
+        let rotate: HTMLDivElement = <HTMLDivElement>document.querySelector("#rotate");
+
+        position.style.border =  "0px solid #ff0000";
+        rotate.style.border = "0px solid #ff0000";
 
         if (animationid == "position") {
             selectedanimation = "position";
+            position.style.border = "1px solid #ff0000";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
+            rotate.style.border = "1px solid #ff0000";
         }
 
         console.log(selectedanimation);
@@ -336,6 +341,7 @@ namespace MagicCanvas {
     function clearForAnimation(): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
         crc2.clearRect(0, 0, canvas.width, canvas.height);
+        setBackground();
     }
 
     function clearCanvas(): void {
@@ -343,6 +349,7 @@ namespace MagicCanvas {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
         crc2.clearRect(0, 0, canvas.width, canvas.height);
         symbols = [];
+        setBackground();
     }
 
     function drawAll(): void {
@@ -360,6 +367,11 @@ namespace MagicCanvas {
         moveX = event.offsetX;
         moveY = event.offsetY;
         console.log("moveX: " + moveX + " moveY: " + moveY);
+
+        // scale from display coordinates to model coordinates
+        moveX = Math.round( event.offsetX * (canvas.width / canvas.offsetWidth) );
+        moveY = Math.round( event.offsetY * (canvas.height / canvas.offsetHeight) );
+
 
         draggedElementIndex = GetDraggedElement(moveX, moveY);
         if (draggedElementIndex !== -1) {

@@ -240,13 +240,17 @@ var MagicCanvas;
     }
     function setAnimation(event) {
         let animationid = event.currentTarget.getAttribute("id");
-        let positiondiv = document.querySelector("#position");
-        let rotatediv = document.querySelector("#rotate");
+        let position = document.querySelector("#position");
+        let rotate = document.querySelector("#rotate");
+        position.style.border = "0px solid #ff0000";
+        rotate.style.border = "0px solid #ff0000";
         if (animationid == "position") {
             selectedanimation = "position";
+            position.style.border = "1px solid #ff0000";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
+            rotate.style.border = "1px solid #ff0000";
         }
         console.log(selectedanimation);
     }
@@ -281,12 +285,14 @@ var MagicCanvas;
     function clearForAnimation() {
         let canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
+        setBackground();
     }
     function clearCanvas() {
         console.log("delete");
         let canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
         MagicCanvas.symbols = [];
+        setBackground();
     }
     function drawAll() {
         let index = 0;
@@ -299,6 +305,9 @@ var MagicCanvas;
         moveX = event.offsetX;
         moveY = event.offsetY;
         console.log("moveX: " + moveX + " moveY: " + moveY);
+        // scale from display coordinates to model coordinates
+        moveX = Math.round(event.offsetX * (canvas.width / canvas.offsetWidth));
+        moveY = Math.round(event.offsetY * (canvas.height / canvas.offsetHeight));
         draggedElementIndex = GetDraggedElement(moveX, moveY);
         if (draggedElementIndex !== -1) {
             isMoving = true;
