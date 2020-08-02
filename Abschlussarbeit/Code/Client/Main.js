@@ -86,12 +86,12 @@ var MagicCanvas;
     }
     async function savePicture(_event) {
         // eingetragener Name des Nutzers
-        let name = document.getElementById("picturename").value;
+        let nameSaved = document.getElementById("picturename").value;
         console.log("name:" + name);
         // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
-        let data = JSON.stringify(MagicCanvas.symbols);
-        let query = new URLSearchParams(data);
-        let response = await fetch(appurl + "?" + query.toString());
+        let datasymbols = JSON.stringify(MagicCanvas.symbols);
+        // let query: URLSearchParams = new URLSearchParams(<any>data);
+        let response = await fetch(appurl + "?" + "action=insert&name" + nameSaved + "&data" + datasymbols);
         let responseText = await response.text();
         console.log(responseText);
         alert("Picture saved!");

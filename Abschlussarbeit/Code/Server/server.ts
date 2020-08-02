@@ -8,6 +8,11 @@ export namespace MagicCanvas {
 
     let CanvasCollection: Mongo.Collection;
 
+    interface DataStructure {
+        name: string;
+        data: string;
+    }
+
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
@@ -16,8 +21,6 @@ export namespace MagicCanvas {
 
     let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
     
- 
-
     startServer(port);
     connectToDatabase(databaseurl);
 
@@ -42,6 +45,10 @@ export namespace MagicCanvas {
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("Whats up?");
 
+        let action: string;
+        let data: string;
+        let name: string;
+
         _response.setHeader("content-type", "text/html; charset-utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
@@ -51,11 +58,21 @@ export namespace MagicCanvas {
                 _response.write(key + ":" + url.query[key] + "<br/>");
             }
 
-            let jsonString: string = JSON.stringify(url.query);
+            let value: string = "name:" + url.query["name"] + ", data" + url.query["data"];
+            _response.write("value:" + value);
+        
+            let jsonString: string = JSON.stringify(value);
             _response.write(jsonString);
+
+            if (url.query["action"] == "insert")
+            storeCanvasCollection(jsonString);
         }
 
         _response.write("This is my response");
         _response.end();
+    }
+
+    function storeCanvasCollection (_data: any): void {
+        CanvasCollection.insert(_data);
     }
 }

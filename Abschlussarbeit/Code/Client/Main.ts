@@ -7,6 +7,11 @@ namespace MagicCanvas {
 
     let appurl: string = "https://magiccanvas.herokuapp.com/";
 
+    interface DataStructure {
+        name: string;
+        data: string;
+    }
+
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
     let selectedform: string = "circle";
@@ -113,14 +118,14 @@ namespace MagicCanvas {
 
     async function savePicture(_event: Event): Promise<void> {
         // eingetragener Name des Nutzers
-        let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
+        let nameSaved: string = (<HTMLInputElement>document.getElementById("picturename")).value;
         console.log("name:" + name);
 
         // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
-        let data: string = JSON.stringify(symbols);
+        let datasymbols: string = JSON.stringify(symbols);
 
-        let query: URLSearchParams = new URLSearchParams(<any>data);
-        let response: Response = await fetch(appurl + "?" + query.toString());
+        // let query: URLSearchParams = new URLSearchParams(<any>data);
+        let response: Response = await fetch(appurl + "?" + "action=insert&name" + nameSaved + "&data" + datasymbols);
         let responseText: string = await response.text();
         console.log(responseText);
         alert("Picture saved!");
@@ -324,7 +329,7 @@ namespace MagicCanvas {
                 // Kommentar einfügen
                 clearForAnimation();
                 animateElements(animationRunning);
-            },  25);
+            },                   25);
         }
     }
 
