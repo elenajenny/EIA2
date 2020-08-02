@@ -91,7 +91,7 @@ var MagicCanvas;
         // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         let datasymbols = JSON.stringify(MagicCanvas.symbols);
         // let query: URLSearchParams = new URLSearchParams(<any>data);
-        let response = await fetch(appurl + "?" + "action=insert&name" + nameSaved + "&data" + datasymbols);
+        let response = await fetch(appurl + "?" + "action=insert&name" + nameSaved + "&data=" + datasymbols);
         let responseText = await response.text();
         console.log(responseText);
         alert("Picture saved!");
