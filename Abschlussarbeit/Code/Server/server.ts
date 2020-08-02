@@ -5,9 +5,10 @@ import * as Mongo from "mongodb";
 export namespace MagicCanvas {
     let server: Http.Server = Http.createServer();
     console.log(server);
-
+    
     let CanvasCollection: Mongo.Collection;
 
+    // Interface für Daten Übertragung
     interface DataStructure {
         name: string;
         data: string;
@@ -19,8 +20,8 @@ export namespace MagicCanvas {
 
     console.log("Server starting on port:" + port);
 
-    let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/MagicCanvas?retryWrites=true&w=majority";
-    
+    let databaseurl: string = "mongodb+srv://Testuser:Furtwangen@eia2-euh5i.mongodb.net/EIA2?retryWrites=true&w=majority";
+
     startServer(port);
     connectToDatabase(databaseurl);
 
@@ -31,8 +32,10 @@ export namespace MagicCanvas {
 
         server.listen(_port);
         server.addListener("request", handleRequest);
+
     }
-    
+
+
     async function connectToDatabase(_url: string): Promise<void> {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
@@ -41,16 +44,16 @@ export namespace MagicCanvas {
         console.log("Database connection" + CanvasCollection != undefined);
     }
 
-
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("Whats up?");
-
         let action: string;
         let data: string;
-        let name: string;
-
+        let name: string;    
         _response.setHeader("content-type", "text/html; charset-utf-8");
-        _response.setHeader("Access-Control-Allow-Origin", "*");
+        // _response.setHeader("Access-Control-Allow-Origin", "*");
+        _response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+
+
 
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);
@@ -58,21 +61,38 @@ export namespace MagicCanvas {
                 _response.write(key + ":" + url.query[key] + "<br/>");
             }
 
-            let value: string = "name:" + url.query["name"] + ", data" + url.query["data"];
-            _response.write("value:" + value);
-        
-            let jsonString: string = JSON.stringify(value);
-            _response.write(jsonString);
+            if ( url.query["action"] == "insert") {
+                let value: string = "name:" + url.query["name"] + ", data:" + url.query["data"];
+                _response.write("value:" + value);
+                
+                let jsonString: string = JSON.stringify(value);
+                _response.write(jsonString);
+                
+                storeCanvasCollection(jsonString);
+            }
 
-            if (url.query["action"] == "insert")
-            storeCanvasCollection(jsonString);
+            if ( url.query["action"] == "select") {
+                _response.write("radCanvasCollection");
+                // readCanvasCollection(_response);
+            }
+            
         }
-
         _response.write("This is my response");
         _response.end();
     }
 
-    function storeCanvasCollection (_data: any): void {
+    function storeCanvasCollection(_data: any): void {
         CanvasCollection.insert(_data);
+    }
+
+    function readCanvasCollection(_response: Http.ServerResponse): void {
+        // err = error
+        CanvasCollection.find({}).toArray(function (err, result) {
+            // Wenn Fehler passiert, diesen rausschmeißen
+            _response.write("vor error");
+            if (err) throw err;
+            _response.write(result);
+            
+        });
     }
 }
