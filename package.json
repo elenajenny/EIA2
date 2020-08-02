@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node Abschlussarbeit/Code/Server/server.js remote"
+    "start": "node Abschlussarbeit/Code/Server/server.js"
   },
   "repository": {
     "type": "git",
