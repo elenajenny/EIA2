@@ -51,6 +51,11 @@ var MagicCanvas;
             if (url.query["action"] == "select") {
                 _response.write("radCanvasCollection");
                 // readCanvasCollection(_response);
+                CanvasCollection.find({}).toArray(function (err, result) {
+                    // Wenn Fehler passiert, diesen rausschmeißen
+                    console.log("result:" + result);
+                    _response.write(JSON.stringify(result));
+                });
             }
         }
         _response.write("This is my response");
@@ -58,16 +63,6 @@ var MagicCanvas;
     }
     function storeCanvasCollection(_data) {
         CanvasCollection.insert(_data);
-    }
-    function readCanvasCollection(_response) {
-        // err = error
-        CanvasCollection.find({}).toArray(function (err, result) {
-            // Wenn Fehler passiert, diesen rausschmeißen
-            _response.write("vor error");
-            if (err)
-                throw err;
-            _response.write(result);
-        });
     }
 })(MagicCanvas = exports.MagicCanvas || (exports.MagicCanvas = {}));
 //# sourceMappingURL=Server.js.map

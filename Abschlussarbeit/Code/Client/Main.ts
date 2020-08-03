@@ -65,6 +65,15 @@ namespace MagicCanvas {
         let yellow: HTMLDivElement = <HTMLDivElement>document.querySelector("#yellow");
         yellow.addEventListener("click", setColor);
 
+        // Klick auf Regel Button
+        let rules: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#rules");
+        rules.addEventListener("click", rulesVisibility);
+
+        // Generate
+        let generate: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#generate");
+        generate.addEventListener("click", generateSymbols);
+
+
         // Animationen
         let start: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#startanimation");
         start.addEventListener("click", animateElementsStart);
@@ -91,14 +100,7 @@ namespace MagicCanvas {
         let flash: HTMLDivElement = <HTMLDivElement>document.querySelector("#flashicon");
         flash.addEventListener("click", setForm);
 
-        // Klick auf Regel Button
-        let rules: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#rules");
-        rules.addEventListener("click", rulesVisibility);
-
-        // Generate
-        let generate: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#generate");
-        generate.addEventListener("click", generateSymbols);
-
+        
 
         // Delete Button, um den Canvas zu säubern
         let deleteBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#delete");
@@ -345,7 +347,7 @@ namespace MagicCanvas {
 
         //wenn der Status = false ist dann wird keine Animation aufgerufen
         if (state == false) {
-            clearTimeout(timeOut); //?
+            clearTimeout(timeOut); //verhindern das die Funktion erneut ausgeführt wird und Animation beenden
         } else {
             for (index = 0; index < symbols.length; index++) {
                 //alle Symbols werden animiert innerhalb des canvas
@@ -404,7 +406,7 @@ namespace MagicCanvas {
         moveY = Math.round( event.offsetY * (canvas.height / canvas.offsetHeight) );
 
         //bekommt die Parameter wo die Mouse Position ist 
-
+        //Element das verschoben werden soll ermitteln
         draggedElementIndex = getDraggedElement(moveX, moveY);
         //wenn die Position innerhalb des Canvas ist, dann wird Variable isMoving true gesetzt
         if (draggedElementIndex !== -1) {
@@ -414,7 +416,7 @@ namespace MagicCanvas {
 
     function nowMove(canvas: any, event: any): void {
         if (isMoving === true) {
-            // moving
+            //aktuelle Position der Maus
             moveX = event.offsetX;
             moveY = event.offsetY;
             if (draggedElementIndex !== -1) {
@@ -448,7 +450,7 @@ namespace MagicCanvas {
 
     function getDraggedElement(moveX: number = 0, moveY: number = 0) {
         let index: number = 0; //welches Element
-        let foundIndex: number = -1;
+        let foundIndex: number = -1; //Inedx des Elements welches durch den Benutzer verschoben werden soll
 
         for (index = 0; index < symbols.length; index++) {
             //Mausposition muss auf dem Element sein, um es zu bewegen 

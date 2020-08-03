@@ -74,25 +74,19 @@ export namespace MagicCanvas {
             if ( url.query["action"] == "select") {
                 _response.write("radCanvasCollection");
                 // readCanvasCollection(_response);
+                CanvasCollection.find({}).toArray(function (err, result) {
+                    // Wenn Fehler passiert, diesen rausschmeißen
+                    console.log("result:" + result);
+                    _response.write(JSON.stringify(result));
+                });
             }
-            
         }
+
         _response.write("This is my response");
         _response.end();
     }
 
     function storeCanvasCollection(_data: any): void {
         CanvasCollection.insert(_data);
-    }
-
-    function readCanvasCollection(_response: Http.ServerResponse): void {
-        // err = error
-        CanvasCollection.find({}).toArray(function (err, result) {
-            // Wenn Fehler passiert, diesen rausschmeißen
-            _response.write("vor error");
-            if (err) throw err;
-            _response.write(result);
-            
-        });
     }
 }
